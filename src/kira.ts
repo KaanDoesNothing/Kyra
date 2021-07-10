@@ -13,7 +13,7 @@ const client = new SapphireClient({
 	listenOptions: {
 		port: 4000
     },
-	intents: Intents.NON_PRIVILEGED,
+	intents: Intents.ALL,
 	defaultPrefix: "=>",
 	caseInsensitiveCommands: true,
 	logger: {
