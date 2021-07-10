@@ -1,0 +1,10 @@
+node_modules
+
+bin/
+.vscode/
+obj/
+
+src/token.json
+*.js
+
+package-lock.json
