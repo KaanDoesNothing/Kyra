@@ -24,7 +24,7 @@ const client = new SapphireClient({
 		let guildSettings: any = (await db.table("guilds").filter({ guild_id: msg.guild.id }).run())[0];
 
 		if (!guildSettings) {
-			let newGuildSettings = { guild_id: msg.guild.id, prefix: "==>" };
+			let newGuildSettings = { guild_id: msg.guild.id, prefix: "=>" };
 
 			await db.table("guilds").insert(newGuildSettings).run();
 
