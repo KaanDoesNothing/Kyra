@@ -1,16 +1,17 @@
-import type { Message } from "discord.js";
+import { Message, MessageEmbed } from "discord.js";
 import { Command, CommandOptions } from "@sapphire/framework";
+import { EmbedConstructor } from "../../lib/embed";
 
 export class UserCommand extends Command {
 	public async run(msg: Message, args) {
 		const commands = this.context.client.stores.get("commands");
 
-		let output = ``;
+		let embed = new EmbedConstructor();
 
-		commands.forEach(command => {
-			output += `${command.name}: ${command.description}\n`;
+		commands.forEach(cmd => {
+			embed.addField(cmd.name, cmd.description.length > 0 ? cmd.description : "None", true);
 		});
 
-		msg.channel.send("```\n" + output + "\n```");
+		msg.channel.send({embeds: [embed]});
 	}
 }
