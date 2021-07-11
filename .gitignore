@@ -5,6 +5,7 @@ bin/
 obj/
 
 src/token.json
+src/private.json
 *.js
 
 package-lock.json

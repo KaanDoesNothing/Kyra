@@ -6,14 +6,14 @@ import { BOT_TOKEN } from "./config";
 import { db } from "./db";
 import { guildSettingsInterface } from "./interfaces/guild";
 import { Client } from "./lib/client";
-import { token } from "./token.json";
+import { token, intents as configIntents } from "./private.json";
 
 const client = new SapphireClient({
 	//@ts-ignore
 	listenOptions: {
 		port: 4000
     },
-	intents: 32767,
+	intents: configIntents,
 	defaultPrefix: "=>",
 	caseInsensitiveCommands: true,
 	logger: {
