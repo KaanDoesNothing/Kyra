@@ -27,6 +27,7 @@
     "@sapphire/plugins-interactions": "github:sapphiredev/interactions",
     "axios": "^0.21.1",
     "discord-api-types": "^0.18.1",
+    "discord-eval.ts": "^1.0.14",
     "discord-ytdl-core": "^5.0.4",
     "discord.js": "github:discordjs/discord.js#master",
     "erela.js": "^2.3.3",
@@ -35,6 +36,7 @@
     "pug": "^3.0.2",
     "rethinkdb-ts": "^2.4.12",
     "shoukaku": "^1.6.4",
+    "systeminformation": "^5.7.7",
     "ytdl-core": "^4.8.3"
   }
 }
