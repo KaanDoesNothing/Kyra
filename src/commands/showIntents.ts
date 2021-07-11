@@ -5,6 +5,5 @@ import { Intents } from "discord.js";
 
 export class UserCommand extends Command {
 	public async run(msg: Message, args) {
-        msg.channel.send({content: Intents.NON_PRIVILEGED.toString()});
 	}
 }
