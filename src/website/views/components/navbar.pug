@@ -1,7 +1,9 @@
-nav(class="navbar navbar-expand-lg navbar-dark bg-dark")
+nav(class="navbar navbar-expand-sm navbar-dark bg-dark")
     div(class="container-fluid")
-        button(class="navbar-toggler", type="button")
-        span(class="navbar-toggler-icon")
+        a(class="navbar-brand", type="button", href="/") #{data.client.user.username}
+        //- span(class="navbar-toggler-icon") 
 
     div(class="collapse navbar-collapse")
-        ul(class="")
+        ul(class="navbar-nav")
+            li(class="nav-item")
+                a(class="nav-link") Home
