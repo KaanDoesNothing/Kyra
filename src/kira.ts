@@ -8,7 +8,7 @@ import { guildSettingsInterface } from "./interfaces/guild";
 import { Client } from "./lib/client";
 import { token, intents as configIntents } from "./private.json";
 
-const client = new SapphireClient({
+const client = new Client({
 	//@ts-ignore
 	listenOptions: {
 		port: 4000

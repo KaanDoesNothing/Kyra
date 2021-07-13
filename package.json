@@ -32,11 +32,12 @@
     "discord.js": "github:discordjs/discord.js#master",
     "erela.js": "^2.3.3",
     "fastify": "^3.18.1",
+    "node-abort-controller": "^2.0.0",
     "point-of-view": "^4.15.0",
     "pug": "^3.0.2",
     "rethinkdb-ts": "^2.4.12",
-    "shoukaku": "^1.6.4",
     "systeminformation": "^5.7.7",
+    "undici": "^4.1.1",
     "ytdl-core": "^4.8.3"
   }
 }

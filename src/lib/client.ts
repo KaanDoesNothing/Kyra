@@ -6,9 +6,7 @@ export class Client extends SapphireClient {
     constructor(options) {
         super(options);
 
-        this.musicManager = musicManager;
-
-        this.musicManager.setClient(this);
+        this.musicManager = new musicManager(this);
 
 /*
         this.musicManager = new musicManager(this, {
