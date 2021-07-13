@@ -12,6 +12,10 @@ export class UserCommand extends Command {
 			embed.addField(cmd.name, cmd.description.length > 0 ? cmd.description : "None", true);
 		});
 
+		// let output = commands.map(cmd => `\`${cmd.name}\` `).join(" ");
+
+		// embed.setDescription(output);
+
 		msg.channel.send({embeds: [embed]});
 	}
 }
