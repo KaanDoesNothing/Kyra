@@ -4,7 +4,8 @@ import { Command, CommandOptions, Args } from "@sapphire/framework";
 import { Client } from "../../lib/client";
 
 @ApplyOptions<CommandOptions>({
-	aliases: ["add"]
+	aliases: ["add"],
+	preconditions: ["voiceOnly"]
 })
 
 export class UserCommand extends Command {

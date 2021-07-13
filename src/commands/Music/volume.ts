@@ -3,11 +3,12 @@ import type { Message } from "discord.js";
 import { Command, CommandOptions, Args } from "@sapphire/framework";
 import { Client } from "../../lib/client";
 
+@ApplyOptions<CommandOptions>({
+	preconditions: ["voiceOnly"]
+})
+
 export class UserCommand extends Command {
 	public async run(msg: Message, args: Args) {
-		const channel = msg.member.voice.channel;
-        if (!channel) return msg.reply({content: "You need to join a voice channel."});
-
         let volume = await args.rest("integer");
 
         if(!volume) return msg.reply
