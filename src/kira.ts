@@ -1,5 +1,6 @@
 import { LogLevel, SapphireClient } from "@sapphire/framework";
 import "@sapphire/plugin-logger/register";
+import "@sapphire/plugin-api/register";
 import { Intents } from "discord.js";
 import { BOT_TOKEN } from "./config";
 
@@ -9,10 +10,6 @@ import { Client } from "./lib/client";
 import { token, intents as configIntents } from "./private.json";
 
 const client = new Client({
-	//@ts-ignore
-	listenOptions: {
-		port: 4000
-    },
 	intents: configIntents,
 	defaultPrefix: "=>",
 	caseInsensitiveCommands: true,
@@ -32,7 +29,22 @@ const client = new Client({
 		}
 
 		return guildSettings.prefix;
-    }
+    },
+	api: {
+		auth: {
+			id: "",
+			secret: "",
+			cookie: "SAPPHIRE_AUTH",
+			redirect: "",
+			scopes: ["identify"],
+			transformers: []
+		},
+		prefix: "/",
+		origin: "*",
+		listenOptions: {
+			port: 4000
+		}
+	}
 });
 
 async function main() {

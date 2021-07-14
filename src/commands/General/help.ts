@@ -8,14 +8,31 @@ export class UserCommand extends Command {
 
 		let embed = new EmbedConstructor();
 
+		let categories = [];
+
+		// temporary bad solutions because i'm bad at regex and categories aren't supported yet
+		// commands.forEach(cmd => {
+		// 	let args = cmd.path.split(`\\commands`)
+		// 	let string = args[1];
+		// 	let finalString = string.replace("\\", "").split("\\")[0];
+
+		// 	if(!categories[finalString]) categories[finalString] = [];
+
+		// 	categories[finalString].push(cmd);
+		// });
+
+		// categories.forEach(category => {
+		// 	let commandsLine = "";
+		// 	category.forEach(cmd => {
+		// 		commandsLine+= (`\`${cmd.name}\` `);
+		// 	});
+
+		// 	embed.addField("test", commandsLine);
+		// });
 		commands.forEach(cmd => {
 			embed.addField(cmd.name, cmd.description.length > 0 ? cmd.description : "None", true);
 		});
-
-		// let output = commands.map(cmd => `\`${cmd.name}\` `).join(" ");
-
-		// embed.setDescription(output);
-
+		
 		msg.channel.send({embeds: [embed]});
 	}
 }

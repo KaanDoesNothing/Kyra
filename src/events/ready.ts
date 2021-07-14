@@ -7,7 +7,7 @@ export class UserEvent extends Event<Events.Ready> {
 	public async run() {
         server(this.context.client);
 
-		this.context.client.user.setPresence({ activities: [{ name: `=>Help, ${this.context.client.guilds.cache.size} Servers`, url: "https://www.twitch.tv/vortexbot", type: 1 } ]});
+		// this.context.client.user.setPresence({ activities: [{ name: `=>Help, ${this.context.client.guilds.cache.size} Servers`, url: "https://www.twitch.tv/vortexbot", type: 1 } ]});
 
 		let musicManager = (this.context.client as Client).musicManager;
 
