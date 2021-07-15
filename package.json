@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@joshdb/core": "^1.2.5",
-    "@lavacord/discord.js": "0.0.7",
     "@sapphire/decorators": "^2.1.4",
     "@sapphire/framework": "^1.0.2",
     "@sapphire/pieces": "^1.2.5",
