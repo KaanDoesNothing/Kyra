@@ -1,6 +1,6 @@
 import { LogLevel, SapphireClient } from "@sapphire/framework";
-import "@sapphire/plugin-logger/register";
 import "@sapphire/plugin-api/register";
+import "@sapphire/plugin-logger/register";
 import { Intents } from "discord.js";
 import { BOT_TOKEN } from "./config";
 
@@ -24,6 +24,8 @@ const client = new Client({
 			let newGuildSettings = { guild_id: msg.guild.id, prefix: "=>" };
 
 			await db.table("guilds").insert(newGuildSettings).run();
+
+			client.logger.info(`prefix created for ${msg.guild.id}`);
 
 			guildSettings = newGuildSettings;
 		}
