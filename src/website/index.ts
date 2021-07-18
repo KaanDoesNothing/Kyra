@@ -1,5 +1,6 @@
 import fastify from "fastify";
 import pointOfView from "point-of-view";
+import httpProxy from "fastify-http-proxy";
 import pug from "pug";
 import { request } from "../interfaces/website";
 
@@ -20,6 +21,11 @@ export default async (client) => {
         },
         root: `${__dirname}/views`,
         viewExt: "pug"
+    });
+
+    app.register(httpProxy, {
+        upstream: "http://localhost:4000",
+        prefix: "/api"
     });
 
     app.get("/", (req: request, res) => {
