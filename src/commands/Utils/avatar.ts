@@ -2,13 +2,13 @@ import type { GuildMember, Message } from "discord.js";
 import { Args, CommandOptions, PermissionsPrecondition } from "@sapphire/framework";
 import { ApplyOptions } from "@sapphire/decorators";
 import { EmbedConstructor } from "../../lib/embed";
-import { Command } from "../../lib/structures/command";
+import { KiraCommand } from "../../lib/structures/command";
 
 @ApplyOptions<CommandOptions>({
     aliases: ["av"]
 })
 
-export class UserCommand extends Command {
+export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
         let user = await args.pick("user").catch(() => msg.author);
 

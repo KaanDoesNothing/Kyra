@@ -1,7 +1,7 @@
 import type { GuildMember, Message } from "discord.js";
 import { Args, CommandOptions, PermissionsPrecondition } from "@sapphire/framework";
 import { ApplyOptions } from "@sapphire/decorators";
-import { Command } from "../../lib/structures/command";
+import { KiraCommand } from "../../lib/structures/command";
 
 @ApplyOptions<CommandOptions>({
     strategyOptions: {
@@ -9,7 +9,7 @@ import { Command } from "../../lib/structures/command";
     }
 })
 
-export class UserCommand extends Command {
+export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
         let title = args.getOption("title");
         let content = args.getOption("content");

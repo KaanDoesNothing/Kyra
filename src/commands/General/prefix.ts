@@ -3,7 +3,7 @@ import type { Message } from "discord.js";
 import { CommandOptions, Args } from "@sapphire/framework";
 import { PermissionsPrecondition } from "@sapphire/framework";
 import { db } from "../../db";
-import { Command } from "../../lib/structures/command";
+import { KiraCommand } from "../../lib/structures/command";
 
 @ApplyOptions<CommandOptions>({
 	aliases: ["setprefix"],
@@ -11,7 +11,7 @@ import { Command } from "../../lib/structures/command";
 	preconditions: [new PermissionsPrecondition("MANAGE_GUILD")]
 })
 
-export class UserCommand extends Command {
+export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
 		let prefix = await args.rest("string") || "";
 

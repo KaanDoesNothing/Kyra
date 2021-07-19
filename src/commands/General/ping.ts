@@ -1,14 +1,14 @@
 import { ApplyOptions } from "@sapphire/decorators";
 import type { Message } from "discord.js";
 import { CommandOptions } from "@sapphire/framework";
-import { Command } from "../../lib/structures/command";
+import { KiraCommand, KiraCommandOptions } from "../../lib/structures/command";
 
-@ApplyOptions<CommandOptions>({
+@ApplyOptions<KiraCommandOptions>({
 	aliases: ["pong"],
 	description: "Shows the bot latency."
 })
 
-export class UserCommand extends Command {
+export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args) {
 		const message = await msg.channel.send("Ping...");
 		return msg.channel.send(`Pong! Took: ${message.createdTimestamp - msg.createdTimestamp}ms!`);

@@ -2,9 +2,14 @@ import { Message } from "discord.js";
 import { Args } from "@sapphire/framework";
 import { EmbedConstructor } from "../../lib/embed";
 import util from "util";
-import { Command } from "../../lib/structures/command";
+import { KiraCommand, KiraCommandOptions } from "../../lib/structures/command";
+import { ApplyOptions } from "@sapphire/decorators";
 
-export class UserCommand extends Command {
+@ApplyOptions<KiraCommandOptions>({
+        hidden: true
+})
+
+export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args) {
         const code = await args.rest("string");
         let ownerApplication = await this.context.client.application.fetch();

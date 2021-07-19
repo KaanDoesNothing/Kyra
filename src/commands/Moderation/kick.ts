@@ -1,13 +1,13 @@
 import type { GuildMember, Message } from "discord.js";
 import { Args, CommandOptions, PermissionsPrecondition } from "@sapphire/framework";
 import { ApplyOptions } from "@sapphire/decorators";
-import { Command } from "../../lib/structures/command";
+import { KiraCommand } from "../../lib/structures/command";
 
 @ApplyOptions<CommandOptions>({
     preconditions: [new PermissionsPrecondition("KICK_MEMBERS")]
 })
 
-export class UserCommand extends Command {
+export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
                 let member: GuildMember = await args.pick("member");
                 let reason = await args.rest("string");

@@ -5,9 +5,9 @@ import si from "systeminformation";
 import { version } from "discord.js";
 import { EmbedConstructor } from "../../lib/embed";
 import { commandsCache } from "../../lib/cache";
-import { Command } from "../../lib/structures/command";
+import { KiraCommand } from "../../lib/structures/command";
 
-export class UserCommand extends Command {
+export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
             console.log(this.category);
             let ownerApplication = await this.context.client.application.fetch();

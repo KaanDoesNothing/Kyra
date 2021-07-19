@@ -1,8 +1,8 @@
 import type { Message } from "discord.js";
 import { CommandOptions } from "@sapphire/framework";
-import { Command } from "../../lib/structures/command";
+import { KiraCommand } from "../../lib/structures/command";
 
-export class UserCommand extends Command {
+export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args) {
 		let question = await args.rest("string").catch(err => {
 			return;

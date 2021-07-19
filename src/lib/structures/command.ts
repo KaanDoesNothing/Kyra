@@ -1,9 +1,15 @@
-import { Command as defaultCommand, CommandOptions, PieceContext, PreconditionEntryResolvable } from "@sapphire/framework";
+import { Command, CommandOptions, PieceContext, PreconditionEntryResolvable } from "@sapphire/framework";
 import { sep } from "path";
 
-export abstract class Command extends defaultCommand {
-    constructor(context: PieceContext, options: CommandOptions) {
+export abstract class KiraCommand extends Command {
+    hidden?: boolean;
+    owner?: boolean;
+    constructor(context: PieceContext, options: KiraCommandOptions) {
         super(context);
+
+        this.hidden = options.hidden ?? false;
+        this.owner = options.owner ?? false;
+        
         // if(!options.preconditions) options.preconditions = [];
         
         // (options.preconditions as PreconditionEntryResolvable[]).push({name: "Cooldown", context: {
@@ -19,4 +25,9 @@ export abstract class Command extends defaultCommand {
         
         return finalPath[0];
     }
+}
+
+export interface KiraCommandOptions extends CommandOptions {
+    hidden?: boolean,
+    owner?: boolean
 }

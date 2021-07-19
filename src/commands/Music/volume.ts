@@ -2,13 +2,13 @@ import { ApplyOptions } from "@sapphire/decorators";
 import type { Message } from "discord.js";
 import { CommandOptions, Args } from "@sapphire/framework";
 import { Client } from "../../lib/client";
-import { Command } from "../../lib/structures/command";
+import { KiraCommand } from "../../lib/structures/command";
 
 @ApplyOptions<CommandOptions>({
 	preconditions: ["voiceOnly"]
 })
 
-export class UserCommand extends Command {
+export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
         let volume = await args.rest("integer");
 
