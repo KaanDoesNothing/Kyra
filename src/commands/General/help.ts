@@ -1,37 +1,35 @@
 import { Message, MessageEmbed } from "discord.js";
-import { Command, CommandOptions } from "@sapphire/framework";
+import { CommandOptions } from "@sapphire/framework";
 import { EmbedConstructor } from "../../lib/embed";
+import { Command } from "../../lib/structures/command";
 
 export class UserCommand extends Command {
-	public async run(msg: Message, args) {
-		const commands = this.context.client.stores.get("commands");
+	public run(msg: Message, args) {
+		let categories: string[] = [];
 
 		let embed = new EmbedConstructor();
+		
+		this.context.stores.get("commands").map((cmd: Command) => {
+			if(categories.includes(cmd.category)) return;
 
-		let categories = [];
-
-		// temporary bad solutions because i'm bad at regex and categories aren't supported yet
-		// commands.forEach(cmd => {
-		// 	let args = cmd.path.split(`\\commands`)
-		// 	let string = args[1];
-		// 	let finalString = string.replace("\\", "").split("\\")[0];
-
-		// 	if(!categories[finalString]) categories[finalString] = [];
-
-		// 	categories[finalString].push(cmd);
-		// });
-
-		// categories.forEach(category => {
-		// 	let commandsLine = "";
-		// 	category.forEach(cmd => {
-		// 		commandsLine+= (`\`${cmd.name}\` `);
-		// 	});
-
-		// 	embed.addField("test", commandsLine);
-		// });
-		commands.forEach(cmd => {
-			embed.addField(cmd.name, cmd.description.length > 0 ? cmd.description : "None", true);
+			categories.push(cmd.category);
 		});
+
+		categories.forEach((category) => {
+            let commandsLine = "";
+            this.context.stores.get("commands").forEach(cmd => {
+				//@ts-ignore
+				if((cmd as Command).category !== category) return;
+                commandsLine += (`\`${cmd.name}\` `);
+            });
+			
+
+            embed.addField(category, commandsLine);
+        });
+
+		// commands.forEach(cmd => {
+		// 	embed.addField(cmd.name, cmd.description.length > 0 ? cmd.description : "None", true);
+		// });
 		
 		msg.channel.send({embeds: [embed]});
 	}

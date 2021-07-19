@@ -1,6 +1,7 @@
 import { Message, MessageEmbed } from "discord.js";
-import { Command, CommandOptions } from "@sapphire/framework";
+import { CommandOptions } from "@sapphire/framework";
 import axios from "axios";
+import { Command } from "../../lib/structures/command";
 
 export class UserCommand extends Command {
 	public async run(msg: Message, args) {

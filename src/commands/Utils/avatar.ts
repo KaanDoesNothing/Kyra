@@ -1,7 +1,8 @@
 import type { GuildMember, Message } from "discord.js";
-import { Command, Args, CommandOptions, PermissionsPrecondition } from "@sapphire/framework";
+import { Args, CommandOptions, PermissionsPrecondition } from "@sapphire/framework";
 import { ApplyOptions } from "@sapphire/decorators";
 import { EmbedConstructor } from "../../lib/embed";
+import { Command } from "../../lib/structures/command";
 
 @ApplyOptions<CommandOptions>({
     aliases: ["av"]

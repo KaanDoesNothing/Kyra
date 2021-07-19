@@ -1,7 +1,8 @@
 import { Message } from "discord.js";
-import { Args, Command } from "@sapphire/framework";
+import { Args } from "@sapphire/framework";
 import { EmbedConstructor } from "../../lib/embed";
 import util from "util";
+import { Command } from "../../lib/structures/command";
 
 export class UserCommand extends Command {
 	public async run(msg: Message, args) {

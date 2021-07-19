@@ -1,5 +1,6 @@
 import type { Message } from "discord.js";
-import { Command, CommandOptions } from "@sapphire/framework";
+import { CommandOptions } from "@sapphire/framework";
+import { Command } from "../../lib/structures/command";
 
 export class UserCommand extends Command {
 	public async run(msg: Message, args) {

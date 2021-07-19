@@ -1,7 +1,8 @@
 import { ApplyOptions } from "@sapphire/decorators";
 import type { Message } from "discord.js";
-import { Command, CommandOptions, Args } from "@sapphire/framework";
+import { CommandOptions, Args } from "@sapphire/framework";
 import { Client } from "../../lib/client";
+import { Command } from "../../lib/structures/command";
 
 @ApplyOptions<CommandOptions>({
 	aliases: ["disconnect"],
