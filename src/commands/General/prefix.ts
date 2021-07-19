@@ -2,7 +2,7 @@ import { ApplyOptions } from "@sapphire/decorators";
 import type { Message } from "discord.js";
 import { CommandOptions, Args } from "@sapphire/framework";
 import { PermissionsPrecondition } from "@sapphire/framework";
-import { db } from "../../db";
+import { db } from "../../lib/db";
 import { KiraCommand } from "../../lib/structures/command";
 
 @ApplyOptions<CommandOptions>({

@@ -2,32 +2,28 @@ import { LogLevel, SapphireClient } from "@sapphire/framework";
 import "@sapphire/plugin-api/register";
 import "@sapphire/plugin-logger/register";
 import { Intents } from "discord.js";
-import { BOT_TOKEN } from "./config";
+import { BOT_TOKEN, PREFIX } from "./config";
 
-import { db } from "./db";
+import { createGuild, db, getGuild } from "./lib/db";
 import { guildSettingsInterface } from "./interfaces/guild";
 import { Client } from "./lib/client";
 import { token, intents as configIntents } from "./private.json";
 
 const client = new Client({
 	intents: configIntents,
-	defaultPrefix: "=>",
+	defaultPrefix: PREFIX,
 	caseInsensitiveCommands: true,
 	logger: {
 		level: LogLevel.Trace
 	},
 	shards: "auto",
 	fetchPrefix: async (msg) => {
-		let guildSettings: any = (await db.table("guilds").filter({ guild_id: msg.guild.id }).run())[0];
+		let guildSettings = await getGuild(msg.guild.id);
 
-		if (!guildSettings) {
-			let newGuildSettings = { guild_id: msg.guild.id, prefix: "=>" };
-
-			await db.table("guilds").insert(newGuildSettings).run();
-
+		if(!guildSettings) {
+			guildSettings = await createGuild(msg.guild.id);
+			
 			client.logger.info(`prefix created for ${msg.guild.id}`);
-
-			guildSettings = newGuildSettings;
 		}
 
 		return guildSettings.prefix;

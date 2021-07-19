@@ -1,6 +1,6 @@
 import { Event, Events, PieceContext } from "@sapphire/framework";
 import type { Message } from "discord.js";
-import { db } from "../db";
+import { db } from "../lib/db";
 
 let alreadyChecked = [];
 
