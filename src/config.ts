@@ -3,3 +3,5 @@ export const DEFAULT_COLOR = 0x29B6F6;
 export const PREFIX = "=>";
 
 export const DB_NAME = "kira";
+
+export const ECONOMY_DAILY_COOLDOWN = 43200000;
