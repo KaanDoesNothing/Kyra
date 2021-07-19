@@ -19,5 +19,9 @@ export const createGuild = async (guildID: Snowflake): Promise<guildSettingsInte
 }
 
 export const getGuild = async (guildID: Snowflake): Promise<guildSettingsInterface> => {
-    return await db.table("guilds").get(guildID).run();
+    return await db.table("guilds").get(guildID).run() || await createGuild(guildID);
+}
+
+export const updateGuild = async (guildEntry: guildSettingsInterface) => {
+    return await r.table("guilds").insert(guildEntry, {conflict: "update"}).run();
 }

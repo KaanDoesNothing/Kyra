@@ -20,12 +20,6 @@ const client = new Client({
 	fetchPrefix: async (msg) => {
 		let guildSettings = await getGuild(msg.guild.id);
 
-		if(!guildSettings) {
-			guildSettings = await createGuild(msg.guild.id);
-			
-			client.logger.info(`prefix created for ${msg.guild.id}`);
-		}
-
 		return guildSettings.prefix;
     },
 	api: {

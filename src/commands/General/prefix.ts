@@ -2,7 +2,7 @@ import { ApplyOptions } from "@sapphire/decorators";
 import type { Message } from "discord.js";
 import { CommandOptions, Args } from "@sapphire/framework";
 import { PermissionsPrecondition } from "@sapphire/framework";
-import { db } from "../../lib/db";
+import { db, getGuild, updateGuild } from "../../lib/db";
 import { KiraCommand } from "../../lib/structures/command";
 
 @ApplyOptions<CommandOptions>({
@@ -17,7 +17,12 @@ export class UserCommand extends KiraCommand {
 
 		if (prefix.length < 1) return msg.reply("You must provide a prefix.");
 
-		await db.table("guilds").filter({ guild_id: msg.guild.id }).update({ prefix: prefix }).run();
+		let guildData = await getGuild(msg.guild.id);
+
+		guildData.prefix = prefix;
+
+		await updateGuild(guildData);
+
 		return msg.reply(`Prefix has been set to ${prefix}.`);
 	}
 }
