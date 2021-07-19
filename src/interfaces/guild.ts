@@ -1,5 +1,8 @@
+import { Snowflake } from "discord.js";
+
 export interface guildSettingsInterface {
-	guild_id: string,
+	id: Snowflake,
+	guild_id: Snowflake,
 	prefix: string,
 	disabled_commands: [command_name: string]
 }
