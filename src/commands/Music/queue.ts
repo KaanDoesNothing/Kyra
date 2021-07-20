@@ -20,16 +20,11 @@ export class UserCommand extends KiraCommand {
         if(!player) return msg.reply({content: "Music isn't playing."});
 
         let queue = player.queue;
-        console.log(queue);
 
-        // let embed = new EmbedConstructor()
-        // .setThumbnail(track.thumbnail)
-        // .setTitle(`Now playing: ${track.title}`)
-        // .setDescription(`
-        // ${millisToMinutesAndSeconds(player.position)} / ${millisToMinutesAndSeconds(track.duration)}
-        // \nRequested by: ${(track.requester as User).tag}
-        // `);
+        let embed = new EmbedConstructor()
+        .setTitle("Queue")
+        .setDescription(queue.map((track, i) => `${i++} - ${track.title}`).join("\n"));
 
-        // msg.channel.send({embeds: [embed]});
+        msg.channel.send({embeds: [embed]});
 	}
 }
