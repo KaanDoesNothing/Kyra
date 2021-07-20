@@ -5,15 +5,13 @@ import { Client } from "../../lib/client";
 import { KiraCommand } from "../../lib/structures/command";
 
 @ApplyOptions<CommandOptions>({
-	preconditions: ["voiceOnly"]
+	preconditions: ["voiceOnly", "playerRequired"]
 })
 
 export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
 		let musicManager = (this.context.client as Client).musicManager;
 		let player = musicManager.manager.get(msg.guild.id);
-
-        if(!player) return msg.reply({content: "Music isn't playing."});
 
         player.pause(false);
 

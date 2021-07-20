@@ -1,13 +1,13 @@
 import { ApplyOptions } from "@sapphire/decorators";
-import type { Message, User } from "discord.js";
+import type { Message } from "discord.js";
 import { Args } from "@sapphire/framework";
 import { Client } from "../../lib/client";
 import { KiraCommand, KiraCommandOptions } from "../../lib/structures/command";
 import { Player } from "erela.js";
-import { EmbedConstructor } from "../../lib/embed";
 
 @ApplyOptions<KiraCommandOptions>({
-	preconditions: ["voiceOnly", "playerRequired"]
+	preconditions: ["voiceOnly", "playerRequired"],
+	hidden: true
 })
 
 export class UserCommand extends KiraCommand {
@@ -15,12 +15,14 @@ export class UserCommand extends KiraCommand {
 		let musicManager = (this.context.client as Client).musicManager;
 		let player: Player = musicManager.manager.get(msg.guild.id);
 
-        let queue = player.queue;
+		let isRepeating = player.queueRepeat;
 
-        let embed = new EmbedConstructor()
-        .setTitle("Queue")
-        .setDescription(queue.map((track, i) => `${i++} - ${track.title}`).join("\n"));
-
-        msg.channel.send({embeds: [embed]});
+		if(isRepeating) {
+			player.setQueueRepeat(false);
+			msg.channel.send({content: "Queue repeating has been disabled."});
+		}else {
+			player.setQueueRepeat(true);
+			msg.channel.send({content: "Queue repeating has been enabled."});
+		}
 	}
 }

@@ -5,7 +5,7 @@ export abstract class KiraCommand extends Command {
     hidden?: boolean;
     owner?: boolean;
     constructor(context: PieceContext, options: KiraCommandOptions) {
-        super(context);
+        super(context, options);
 
         this.hidden = options.hidden ?? false;
         this.owner = options.owner ?? false;

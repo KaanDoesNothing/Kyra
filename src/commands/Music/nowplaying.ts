@@ -9,7 +9,7 @@ import {Duration, TimeTypes} from "@sapphire/time-utilities";
 import { millisToMinutesAndSeconds } from "../../lib/utils";
 
 @ApplyOptions<CommandOptions>({
-	preconditions: ["voiceOnly"],
+	preconditions: ["voiceOnly", "playerRequired"],
     aliases: ["np"]
 })
 
@@ -17,9 +17,7 @@ export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
 		let musicManager = (this.context.client as Client).musicManager;
 		let player: Player = musicManager.manager.get(msg.guild.id);
-
-        if(!player) return msg.reply({content: "Music isn't playing."});
-
+        
         let track = player.queue.current;
 
         let embed = new EmbedConstructor()

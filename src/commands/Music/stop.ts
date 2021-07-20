@@ -6,7 +6,7 @@ import { KiraCommand } from "../../lib/structures/command";
 
 @ApplyOptions<CommandOptions>({
 	aliases: ["disconnect"],
-	preconditions: ["voiceOnly"]
+	preconditions: ["voiceOnly", "playerRequired"]
 })
 
 export class UserCommand extends KiraCommand {
