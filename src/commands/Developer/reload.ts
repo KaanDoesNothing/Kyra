@@ -1,7 +1,4 @@
 import { Message } from "discord.js";
-import { Args } from "@sapphire/framework";
-import { EmbedConstructor } from "../../lib/embed";
-import util from "util";
 import { KiraCommand, KiraCommandOptions } from "../../lib/structures/command";
 import { ApplyOptions } from "@sapphire/decorators";
 
@@ -18,8 +15,8 @@ export class UserCommand extends KiraCommand {
         let values = this.context.client.stores.values();
 
         for (let value in values) {
-            let store: any = this.context.client.stores.get(value);
-            await store.load();
+            let store = this.context.client.stores.get(value);
+            // await store?.load();
         }
 
         return msg.reply({content: "Reloaded."})

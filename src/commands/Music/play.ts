@@ -3,6 +3,7 @@ import type { Message } from "discord.js";
 import { CommandOptions, Args } from "@sapphire/framework";
 import { Client } from "../../lib/client";
 import { KiraCommand } from "../../lib/structures/command";
+import { Player } from "erela.js";
 
 @ApplyOptions<CommandOptions>({
 	aliases: ["add"],
@@ -17,13 +18,17 @@ export class UserCommand extends KiraCommand {
 
 		let res = await musicManager.manager.search(url, msg.author);
 
-		let player = musicManager.manager.create({
-			guild: msg.guild.id,
-			voiceChannel: msg.member.voice.channel.id,
-			textChannel: msg.channel.id
-		});
+		let player: Player = musicManager.manager.get(msg.guild.id);
 
-		player.connect();
+		if(!player) {
+			player = musicManager.manager.create({
+				guild: msg.guild.id,
+				voiceChannel: msg.member.voice.channel.id,
+				textChannel: msg.channel.id
+			});
+			
+			player.connect();
+		}
 
 		player.queue.add(res.tracks[0]);
 		msg.channel.send(`Added ${res.tracks[0].title} to the queue`);
