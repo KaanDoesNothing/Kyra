@@ -20,8 +20,6 @@ const client = new Client({
 	fetchPrefix: async (msg) => {
 		let guildSettings = await getGuild(msg.guild.id);
 
-		console.log(guildSettings);
-
 		return guildSettings.prefix;
     },
 	api: {
