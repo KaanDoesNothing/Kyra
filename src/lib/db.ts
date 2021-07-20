@@ -3,27 +3,40 @@ import { r } from "rethinkdb-ts";
 import { DB_NAME, PREFIX } from "../config";
 import { guildSettingsInterface } from "../interfaces/guild";
 import { userSettingsInterface } from "../interfaces/user";
+import xtend from "xtend";
 
 export const db = r;
 
 r.connectPool({ db: DB_NAME }).then(() => {
     ensureTableExists("guilds");
     ensureTableExists("users");
-});
+}).then(() => {
+    console.log(r.dbList());
+})
 
-export const createGuild = async (guildID: Snowflake): Promise<guildSettingsInterface> => {
-    await r.table("guilds").insert({
+export const defaultGuildSchema = (guildID: Snowflake): guildSettingsInterface => {
+    return {
         id: guildID,
         guild_id: guildID,
         prefix: PREFIX,
-        disabled_commands: []
-    }).run();
+        disabled_commands: [],
+        modlog: {
+            deleted_message: {
+                enabled: false,
+                channel: "0"
+            } 
+        }
+    }
+}
+
+export const createGuild = async (guildID: Snowflake): Promise<guildSettingsInterface> => {
+    await r.table("guilds").insert(defaultGuildSchema(guildID)).run();
     
     return await getGuild(guildID);
 }
 
 export const getGuild = async (guildID: Snowflake): Promise<guildSettingsInterface> => {
-    return await db.table("guilds").get(guildID).run() || await createGuild(guildID);
+    return xtend(defaultGuildSchema(guildID), (await db.table("guilds").get(guildID).run() || await createGuild(guildID)));
 }
 
 export const updateGuild = async (guildEntry: guildSettingsInterface) => {

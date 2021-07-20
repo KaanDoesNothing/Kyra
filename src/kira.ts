@@ -20,6 +20,8 @@ const client = new Client({
 	fetchPrefix: async (msg) => {
 		let guildSettings = await getGuild(msg.guild.id);
 
+		console.log(guildSettings);
+
 		return guildSettings.prefix;
     },
 	api: {
@@ -34,7 +36,7 @@ const client = new Client({
 		prefix: "/",
 		origin: "*",
 		listenOptions: {
-			port: 4000
+			port: 8340
 		}
 	}
 });
