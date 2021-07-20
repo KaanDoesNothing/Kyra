@@ -10,9 +10,7 @@ export const db = r;
 r.connectPool({ db: DB_NAME }).then(() => {
     ensureTableExists("guilds");
     ensureTableExists("users");
-}).then(() => {
-    console.log(r.dbList());
-})
+});
 
 export const defaultGuildSchema = (guildID: Snowflake): guildSettingsInterface => {
     return {
