@@ -24,7 +24,7 @@ export default async (client) => {
     });
 
     app.register(httpProxy, {
-        upstream: "http://localhost:4000",
+        upstream: "http://localhost:8340",
         prefix: "/api"
     });
 

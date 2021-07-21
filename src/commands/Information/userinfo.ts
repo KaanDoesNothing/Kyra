@@ -19,7 +19,6 @@ export class UserCommand extends KiraCommand {
         let embed = new EmbedConstructor()
         .setAuthor(`${user.tag}"s Info`, member.user.displayAvatarURL({dynamic: true}))
         .setThumbnail(user.displayAvatarURL({ size: 512 }))
-        .setColor("RANDOM")
         .addField("Username", user.tag, true)
         .addField("Nickname", member.nickname || user.username, true)
         .addField("Voice Channel", member.voice.channel ? member.voice.channel.name : "None", true)

@@ -10,6 +10,7 @@ export abstract class KiraCommand extends Command {
         this.hidden = options.hidden ?? false;
         this.owner = options.owner ?? false;
         
+        if(this.description.length < 1) this.description = "None";
         // if(!options.preconditions) options.preconditions = [];
         
         // (options.preconditions as PreconditionEntryResolvable[]).push({name: "Cooldown", context: {
