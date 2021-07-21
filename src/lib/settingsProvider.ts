@@ -37,8 +37,6 @@ export class settingsProvider {
     public async set(table: string, id: string, object) {
         this.setCache(table, id, object);
 
-        console.log(`${table}-${id} has been updated!`);
-
         return await db.table(table).insert(object, {conflict: "update"}).run();
     }
 
