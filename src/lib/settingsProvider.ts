@@ -1,17 +1,60 @@
-// import type { Client } from "./client";
-// import {r} from "./db";
+import type { Client } from "./client";
+import {db} from "./db";
+import xtend from "xtend";
 
-// // work in progress
+export class settingsProvider {
+    private db: typeof db;
+    private tables: any;
+    private cache: any;
+    constructor() {
+        this.db = db;
 
-// export class settingsProvider {
-//     private client: Client;
-//     private db: r
-//     constructor(client: Client) {
-//         this.client = client;
-//         this.db = r;
-//     }
+        this.tables = {};
 
-//     public async get(table, id) {
+        this.cache = {};
+    }
 
-//     }
-// }
+    public async get(table: string, id: string) {
+        if(!this.tables[table]) return console.log(`Table: ${table} Doesn't exist!`);
+
+        let data = this.getCache(table, id) || await db.table(table).get(id).run();
+
+        if(data) {
+            let result = xtend(this.tables[table](id), data);
+
+            this.setCache(table, id, result);
+
+            return result;
+        }else {
+            return undefined;
+        }
+    }
+
+    public async set(table: string, id: string, object) {
+        this.setCache(table, id, object);
+
+        return await db.table(table).insert(object, {conflict: "update"}).run();
+    }
+
+    public async ensure(table: string, id: string) {
+        let data = this.getCache(table, id) || await this.get(table, id);
+
+        if(!data) await this.set(table, id, this.tables[table](id));
+
+        return this.tables[table](id);
+    }
+
+    public addTable(table: string, object) {
+        this.tables[table] = object;
+
+        this.cache[table] = new Map();
+    }
+
+    public getCache(table: string, id: string) {
+        return this.cache[table].get(id);
+    }
+
+    public setCache(table: string, id: string, data) {
+        return this.cache[table].set(id, data);
+    }
+}

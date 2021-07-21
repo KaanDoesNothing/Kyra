@@ -3,7 +3,7 @@ import { Args, CommandOptions, PermissionsPrecondition } from "@sapphire/framewo
 import { ApplyOptions } from "@sapphire/decorators";
 import { EmbedConstructor } from "../../lib/embed";
 import { KiraCommand } from "../../lib/structures/command";
-import { getUser } from "../../lib/db";
+import { getUser, provider } from "../../lib/db";
 
 @ApplyOptions<CommandOptions>({
     aliases: ["bal"]
@@ -13,7 +13,7 @@ export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
         let user = await args.pick("user").catch(() => msg.author);
 
-        let userSettings = await getUser(user.id);
+        let userSettings = await provider.ensure("users", user.id);
 
         msg.channel.send({content: `${user.id === msg.author.id ? "You have" : `${user.tag} has`} ${userSettings.balance} coins.`});
 	}

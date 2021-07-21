@@ -4,7 +4,7 @@ import "@sapphire/plugin-logger/register";
 import { Intents } from "discord.js";
 import { BOT_TOKEN, PREFIX } from "./config";
 
-import { createGuild, db, getGuild } from "./lib/db";
+import { createGuild, db, getGuild, provider } from "./lib/db";
 import { guildSettingsInterface } from "./interfaces/guild";
 import { Client } from "./lib/client";
 import { token, intents as configIntents } from "./private.json";
@@ -18,9 +18,10 @@ const client = new Client({
 	},
 	shards: "auto",
 	fetchPrefix: async (msg) => {
-		let guildSettings = await getGuild(msg.guild.id);
+		let guildSettings = await provider.get("guilds", msg.guild.id);
 
 		return guildSettings.prefix;
+		// return guildSettings.prefix;
     },
 	api: {
 		auth: {

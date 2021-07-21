@@ -1,5 +1,6 @@
 import { Command, CommandOptions, PieceContext, PreconditionEntryResolvable } from "@sapphire/framework";
 import { sep } from "path";
+import { provider } from "../db";
 
 export abstract class KiraCommand extends Command {
     hidden?: boolean;
@@ -25,6 +26,10 @@ export abstract class KiraCommand extends Command {
         const finalPath = splittedPath.slice(splittedPath.indexOf("commands") + 1, -1);
         
         return finalPath[0];
+    }
+
+    public get settings() {
+        return provider;
     }
 }
 

@@ -9,7 +9,6 @@ import { KiraCommand } from "../../lib/structures/command";
 
 export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
-            console.log(this.category);
             let ownerApplication = await this.context.client.application.fetch();
 
             let shardCount = this.context.client.shard?.count || 0;
