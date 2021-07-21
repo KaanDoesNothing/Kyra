@@ -33,15 +33,21 @@ export class settingsProvider {
     public async set(table: string, id: string, object) {
         this.setCache(table, id, object);
 
+        console.log(`${table}-${id} has been updated!`);
+
         return await db.table(table).insert(object, {conflict: "update"}).run();
     }
 
     public async ensure(table: string, id: string) {
         let data = this.getCache(table, id) || await this.get(table, id);
 
-        if(!data) await this.set(table, id, this.tables[table](id));
+        if(!data) {
+            await this.set(table, id, this.tables[table](id));
 
-        return this.tables[table](id);
+            return this.tables[table](id);
+        }else {
+            return data;
+        }
     }
 
     public addTable(table: string, object) {

@@ -13,7 +13,9 @@ export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
         let user = await args.pick("user").catch(() => msg.author);
 
-        let userSettings = await provider.ensure("users", user.id);
+        let userSettings = await provider.get("users", user.id);
+
+        console.log(userSettings)
 
         msg.channel.send({content: `${user.id === msg.author.id ? "You have" : `${user.tag} has`} ${userSettings.balance} coins.`});
 	}
