@@ -17,7 +17,7 @@ export class UserCommand extends KiraCommand {
 
         let queue = player.queue;
 
-        let embed = new EmbedConstructor()
+        let embed = new EmbedConstructor(msg)
         .setTitle("Queue")
         .setDescription(queue.map((track, i) => `${i++} - ${track.title}`).join("\n"));
 

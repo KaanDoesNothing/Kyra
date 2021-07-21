@@ -16,7 +16,7 @@ export class UserCommand extends KiraCommand {
 
         let member: GuildMember = msg.guild.members.cache.get(user.id);
 
-        let embed = new EmbedConstructor()
+        let embed = new EmbedConstructor(msg)
         .setAuthor(`${user.tag}"s Info`, member.user.displayAvatarURL({dynamic: true}))
         .setThumbnail(user.displayAvatarURL({ size: 512 }))
         .addField("Username", user.tag, true)

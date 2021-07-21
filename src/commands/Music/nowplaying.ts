@@ -20,7 +20,7 @@ export class UserCommand extends KiraCommand {
         
         let track = player.queue.current;
 
-        let embed = new EmbedConstructor()
+        let embed = new EmbedConstructor(msg)
         .setThumbnail(track.thumbnail)
         .setTitle(`Now playing: ${track.title}`)
         .setDescription(`

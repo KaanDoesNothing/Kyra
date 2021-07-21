@@ -20,7 +20,7 @@ export class UserCommand extends KiraCommand {
             let channels = this.context.client.channels.cache.size;
             let users = this.context.client.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0);
             
-            let embed = new EmbedConstructor()
+            let embed = new EmbedConstructor(msg)
             .addField("Owner", this.context.client.users.cache.get(ownerApplication.owner.id).tag, true)
             .addField("Library", `discord.js@${djsVersion}`, true)
             .addField("Commands", commands.toString(), true)

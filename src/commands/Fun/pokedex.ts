@@ -24,7 +24,7 @@ export class UserCommand extends KiraCommand {
             pokestats.push(pokemon.stats[stat]);
         }
 
-        let embed = new EmbedConstructor()
+        let embed = new EmbedConstructor(msg)
         .setTitle(pokemon.name)
         .setDescription(pokemon.description)
         .setThumbnail(pokemon.sprites.animated)

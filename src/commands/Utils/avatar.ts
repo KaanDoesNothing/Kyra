@@ -12,7 +12,7 @@ export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
         let user = await args.pick("user").catch(() => msg.author);
 
-        let embed = new EmbedConstructor()
+        let embed = new EmbedConstructor(msg)
         .setImage(user.displayAvatarURL({dynamic: true, size: 4096}));
 
         msg.channel.send({embeds: [embed]});

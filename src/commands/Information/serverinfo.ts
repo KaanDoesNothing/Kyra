@@ -12,7 +12,7 @@ export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
         let owner = await msg.guild.fetchOwner();
 
-        let embed = new EmbedConstructor()
+        let embed = new EmbedConstructor(msg)
         .setThumbnail(msg.guild.iconURL())
         .addField("Name", msg.guild.name, true)
         .addField("ID", msg.guild.id, true)

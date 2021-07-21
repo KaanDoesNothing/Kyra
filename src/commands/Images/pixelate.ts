@@ -9,7 +9,7 @@ export class UserCommand extends KiraCommand {
         let user = await args.pick("user").catch(() => msg.author);
 
         let url = `https://some-random-api.ml/canvas/pixelate?avatar=${user.displayAvatarURL({format: "png"})}`;
-		let embed = new EmbedConstructor()
+		let embed = new EmbedConstructor(msg)
 			.setImage(url);
 
 		return msg.channel.send({ embeds: [embed] });

@@ -7,7 +7,7 @@ export class UserCommand extends KiraCommand {
 	public run(msg: Message, args) {
 		let categories: string[] = [];
 
-		let embed = new EmbedConstructor();
+		let embed = new EmbedConstructor(msg);
 		
 		this.context.stores.get("commands").map((cmd: KiraCommand) => {
 			if(categories.includes(cmd.category)) return;
