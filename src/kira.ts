@@ -18,7 +18,7 @@ const client = new Client({
 	},
 	shards: "auto",
 	fetchPrefix: async (msg) => {
-		let guildSettings = await provider.ensure("guilds", msg.guild.id);
+		let guildSettings = await provider.get("guilds", msg.guild.id);
 
 		return guildSettings.prefix;
 		// return guildSettings.prefix;
