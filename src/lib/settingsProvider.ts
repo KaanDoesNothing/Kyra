@@ -24,9 +24,13 @@ export class settingsProvider {
 
             this.setCache(table, id, result);
 
-            return result;
+            return data;
         }else {
-            return undefined;
+            let result = this.tables[table](id);
+
+            this.setCache(table, id, result);
+
+            return result;
         }
     }
 
