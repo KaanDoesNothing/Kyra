@@ -5,3 +5,4 @@ export const PREFIX = "=>";
 export const DB_NAME = "kira";
 
 export const ECONOMY_DAILY_COOLDOWN = 43200000;
+export const ECONOMY_DAILY_REWARD = 500;

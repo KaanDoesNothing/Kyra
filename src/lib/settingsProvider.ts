@@ -6,6 +6,7 @@ export class settingsProvider {
     private db: typeof db;
     private tables: any;
     private cache: any;
+    private client: Client;
     constructor() {
         this.db = db;
 
@@ -37,7 +38,9 @@ export class settingsProvider {
     public async set(table: string, id: string, object) {
         this.setCache(table, id, object);
 
-        return await db.table(table).insert(object, {conflict: "update"}).run();
+        this.syncCache(table, id);
+
+        return await db.table(table).insert(object, {conflict: "update", returnChanges: true}).run();
     }
 
     public async ensure(table: string, id: string) {
@@ -52,10 +55,10 @@ export class settingsProvider {
         }
     }
 
-    public addTable(table: string, object) {
+    public async addTable(table: string, object) {
         this.tables[table] = object;
 
-        this.cache[table] = new Map();
+        this.cache[table] = new Map();   
     }
 
     public getCache(table: string, id: string) {
@@ -64,5 +67,15 @@ export class settingsProvider {
 
     public setCache(table: string, id: string, data) {
         return this.cache[table].set(id, data);
+    }
+
+    public syncCache(table: string, id: string) {
+        // if(this.client) {
+        //     this.client.emit("provider_sync", {table, id});
+        // }
+    }
+
+    public setClient(client: Client) {
+        this.client = client;
     }
 }

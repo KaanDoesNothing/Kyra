@@ -32,5 +32,5 @@ export default async (client) => {
         res.view("index", {data: req.locals});
     });
 
-    app.listen(3000).then(() => console.log("Server started"));
+    // app.listen(3000).then(() => console.log("Server started"));
 }

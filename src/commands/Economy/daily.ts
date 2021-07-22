@@ -1,14 +1,22 @@
-import type { GuildMember, Message } from "discord.js";
-import { Args } from "@sapphire/framework";
+import type { Message } from "discord.js";
+import type { Args } from "@sapphire/framework";
 import { KiraCommand } from "../../lib/structures/command";
-import { getUser } from "../../lib/db";
+import { userSettingsInterface } from "../../interfaces/user";
+import { ECONOMY_DAILY_COOLDOWN, ECONOMY_DAILY_REWARD } from "../../config";
 
 export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
-        let userSettings = await getUser(msg.author.id);
+                let userSettings: userSettingsInterface = await this.settings.get("users", msg.author.id);
 
-        if(userSettings.timeout_daily > Date.now()) {
-            
-        }
+                if((Date.now() - userSettings.timeout_daily) > ECONOMY_DAILY_COOLDOWN) {
+                        userSettings.timeout_daily = Date.now();
+                        userSettings.balance += ECONOMY_DAILY_REWARD;
+
+                        this.settings.set("users", msg.author.id, userSettings);
+
+                        msg.reply("You've collected your daily!");
+                }else {
+                        msg.reply({content: "You've already collected your daily!"});
+                }
 	}
 }
