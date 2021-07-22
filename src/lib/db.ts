@@ -12,9 +12,7 @@ r.connectPool({ db: DB_NAME }).then(() => {
     provider.addTable("users", (id) => defaultUserSchema(id));
 });
 
-const provider = new settingsProvider();
-
-export {provider};
+export const provider = new settingsProvider();
 
 export const defaultGuildSchema = (guildID: Snowflake): guildSettingsInterface => {
     return {
