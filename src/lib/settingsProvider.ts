@@ -41,7 +41,7 @@ export class settingsProvider {
     }
 
     public async ensure(table: string, id: string) {
-        let data = this.getCache(table, id) || await this.get(table, id);
+        let data = await db.table(table).get(id).run();
 
         if(!data) {
             await this.set(table, id, this.tables[table](id));
