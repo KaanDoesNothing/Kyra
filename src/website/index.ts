@@ -28,9 +28,9 @@ export default async (client) => {
         prefix: "/api"
     });
 
-    app.get("/", (req: request, res) => {
-        res.view("index", {data: req.locals});
+    app.register(httpProxy, {
+        upstream: "http://localhost:3000",
+        prefix: "/"
     });
-
     // app.listen(3000).then(() => console.log("Server started"));
 }
