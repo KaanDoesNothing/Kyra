@@ -12,6 +12,7 @@ const client = new Client({
 	logger: {
 		level: LogLevel.Trace
 	},
+	shards: "auto",
 	fetchPrefix: async (msg) => {
 		let guildSettings = await provider.get("guilds", msg.guild.id);
 
