@@ -1,6 +1,6 @@
 import type { Client } from "./client";
 import {db} from "./db";
-import merge from "xtend";
+import { mergeDefault } from "@sapphire/utilities";
 
 export class settingsProvider {
     public db: typeof db;
@@ -21,7 +21,7 @@ export class settingsProvider {
 
         let data = this.getCache(table, id) || await db.table(table).get(id).run();
 
-        let result = merge(this.tables[table](id), data ?? {});
+        let result = mergeDefault(this.tables[table](id), data ?? {});
 
         this.setCache(table, id, result);
 
@@ -50,6 +50,16 @@ export class settingsProvider {
         this.tables[table] = object;
 
         this.cache[table] = new Map();   
+
+        let tableExists = await this.db.tableList().contains(table).run();
+
+        if(!tableExists) {
+            await this.db.tableCreate(table).run();
+    
+            console.log(`DB - Table: ${table} has been created.`);
+        }else {
+            console.log(`DB - Table: ${table} exists.`);
+        }
     }
 
     public getCache(table: string, id: string) {
