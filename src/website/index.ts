@@ -23,6 +23,10 @@ export default async (client) => {
         viewExt: "pug"
     });
 
+    app.get("/test", (req, res) => {
+        res.send("working");
+    })
+
     app.register(httpProxy, {
         upstream: "http://localhost:8340",
         prefix: "/api"
@@ -32,5 +36,6 @@ export default async (client) => {
         upstream: "http://localhost:3000",
         prefix: "/"
     });
-    app.listen(6000).then(() => console.log("Server started"));
+
+    app.listen(3005).then(() => console.log("Server started"));
 }
