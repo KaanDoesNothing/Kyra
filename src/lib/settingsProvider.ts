@@ -4,7 +4,7 @@ import merge from "xtend";
 
 export class settingsProvider {
     public db: typeof db;
-    private tables: [Map<string, object>?];
+    private tables: string[];
     private cache: [Map<string, object>?];
     private client: Client;
     constructor() {
