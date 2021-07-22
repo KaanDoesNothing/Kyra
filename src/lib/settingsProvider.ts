@@ -4,19 +4,20 @@ import merge from "xtend";
 
 export class settingsProvider {
     public db: typeof db;
-    private tables: any;
-    private cache: any;
+    private tables: [Map<string, object>?];
+    private cache: [Map<string, object>?];
     private client: Client;
     constructor() {
         this.db = db;
 
-        this.tables = {};
+        this.tables = [];
 
-        this.cache = {};
+        this.cache = [];
     }
 
     public async get(table: string, id: string) {
         if(!this.tables[table]) return console.log(`Table: ${table} Doesn't exist!`);
+        if(!this.cache[table]) return console.log(`Cache: ${table} Doesn't exist!`);
 
         let data = this.getCache(table, id) || await db.table(table).get(id).run();
 
