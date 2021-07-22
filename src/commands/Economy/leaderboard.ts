@@ -1,8 +1,13 @@
 import type { Message } from "discord.js";
 import type { Args } from "@sapphire/framework";
 import { EmbedConstructor } from "../../lib/embed";
-import { KiraCommand } from "../../lib/structures/command";
+import { KiraCommand, KiraCommandOptions } from "../../lib/structures/command";
 import type { userSettingsInterface } from "../../interfaces/user";
+import { ApplyOptions } from "@sapphire/decorators";
+
+@ApplyOptions<KiraCommandOptions>({
+    aliases: ["lb"]
+})
 
 export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
