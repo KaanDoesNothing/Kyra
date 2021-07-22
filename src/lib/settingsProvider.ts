@@ -20,7 +20,7 @@ export class settingsProvider {
 
         let data = this.getCache(table, id) || await db.table(table).get(id).run();
 
-        let result = xtend(this.tables[table](id), data || {});
+        let result = xtend(this.tables[table](id), data ?? {});
 
         this.setCache(table, id, result);
 
