@@ -1,11 +1,7 @@
-import { LogLevel, SapphireClient } from "@sapphire/framework";
-import "@sapphire/plugin-api/register";
-import "@sapphire/plugin-logger/register";
-import { Intents } from "discord.js";
-import { BOT_TOKEN, PREFIX } from "./config";
+import { LogLevel } from "@sapphire/framework";
+import { PREFIX } from "./config";
 
-import { createGuild, db, getGuild, provider } from "./lib/db";
-import { guildSettingsInterface } from "./interfaces/guild";
+import { provider } from "./lib/db";
 import { Client } from "./lib/client";
 import { token, intents as configIntents } from "./private.json";
 
@@ -16,12 +12,10 @@ const client = new Client({
 	logger: {
 		level: LogLevel.Trace
 	},
-	shards: "auto",
 	fetchPrefix: async (msg) => {
 		let guildSettings = await provider.get("guilds", msg.guild.id);
 
 		return guildSettings.prefix;
-		// return guildSettings.prefix;
     },
 	api: {
 		auth: {
