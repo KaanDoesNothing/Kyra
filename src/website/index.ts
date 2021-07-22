@@ -32,5 +32,5 @@ export default async (client) => {
         upstream: "http://localhost:3000",
         prefix: "/"
     });
-    // app.listen(3000).then(() => console.log("Server started"));
+    app.listen(6000).then(() => console.log("Server started"));
 }
