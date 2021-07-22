@@ -20,19 +20,11 @@ export class settingsProvider {
 
         let data = this.getCache(table, id) || await db.table(table).get(id).run();
 
-        if(data) {
-            let result = xtend(this.tables[table](id), data);
+        let result = xtend(this.tables[table](id), data || {});
 
-            this.setCache(table, id, result);
+        this.setCache(table, id, result);
 
-            return data;
-        }else {
-            let result = this.tables[table](id);
-
-            this.setCache(table, id, result);
-
-            return result;
-        }
+        return result;
     }
 
     public async set(table: string, id: string, object) {
