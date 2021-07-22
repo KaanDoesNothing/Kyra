@@ -1,9 +1,9 @@
 import type { Client } from "./client";
 import {db} from "./db";
-import xtend from "xtend";
+import merge from "xtend";
 
 export class settingsProvider {
-    private db: typeof db;
+    public db: typeof db;
     private tables: any;
     private cache: any;
     private client: Client;
@@ -20,7 +20,7 @@ export class settingsProvider {
 
         let data = this.getCache(table, id) || await db.table(table).get(id).run();
 
-        let result = xtend(this.tables[table](id), data ?? {});
+        let result = merge(this.tables[table](id), data ?? {});
 
         this.setCache(table, id, result);
 
@@ -30,9 +30,7 @@ export class settingsProvider {
     public async set(table: string, id: string, object) {
         this.setCache(table, id, object);
 
-        this.syncCache(table, id);
-
-        return await db.table(table).insert(object, {conflict: "update", returnChanges: true}).run();
+        return await db.table(table).insert(object, {conflict: "update", returnChanges: false}).run();
     }
 
     public async ensure(table: string, id: string) {
@@ -59,12 +57,6 @@ export class settingsProvider {
 
     public setCache(table: string, id: string, data) {
         return this.cache[table].set(id, data);
-    }
-
-    public syncCache(table: string, id: string) {
-        // if(this.client) {
-        //     this.client.emit("provider_sync", {table, id});
-        // }
     }
 
     public setClient(client: Client) {

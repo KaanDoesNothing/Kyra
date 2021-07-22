@@ -1,8 +1,9 @@
 import { Command, CommandOptions, PieceContext, PreconditionEntryResolvable } from "@sapphire/framework";
+import { SubCommandPluginCommand } from "@sapphire/plugin-subcommands";
 import { sep } from "path";
 import { provider } from "../db";
 
-export abstract class KiraCommand extends Command {
+export abstract class KiraCommand extends SubCommandPluginCommand {
     hidden?: boolean;
     owner?: boolean;
     constructor(context: PieceContext, options: KiraCommandOptions) {
@@ -33,7 +34,7 @@ export abstract class KiraCommand extends Command {
     }
 }
 
-export interface KiraCommandOptions extends CommandOptions {
+export interface KiraCommandOptions extends SubCommandPluginCommand.Options {
     hidden?: boolean,
     owner?: boolean
 }
