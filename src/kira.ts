@@ -30,7 +30,7 @@ const client = new Client({
 		prefix: "/",
 		origin: "*",
 		listenOptions: {
-			port: 8340
+			port: 8345
 		}
 	}
 });

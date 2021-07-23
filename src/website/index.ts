@@ -29,7 +29,7 @@ export default async (client: Client) => {
     })
 
     app.register(httpProxy, {
-        upstream: "http://localhost:8340",
+        upstream: "http://localhost:8345",
         prefix: "/api"
     });
 

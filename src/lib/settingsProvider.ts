@@ -46,8 +46,8 @@ export class settingsProvider {
         }
     }
 
-    public async addTable(table: string, object) {
-        this.tables[table] = object;
+    public async addTable(table: string, default_data) {
+        this.tables[table] = default_data;
 
         this.cache[table] = new Map();   
 
