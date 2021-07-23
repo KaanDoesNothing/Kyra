@@ -20,6 +20,8 @@ export class UserEvent extends Event<Events.Message> {
                 if(msg.content.includes(word)) {
                     if(!msg.guild.me.permissions.has("MANAGE_MESSAGES") && msg.deletable) return;
 
+                    if(msg.content.startsWith(guildSettings.prefix)) return;
+
                     msg.delete().catch(err => console.log(err));
                 }
             });

@@ -1,23 +1,38 @@
-import { Command, CommandOptions, PieceContext, PreconditionEntryResolvable } from "@sapphire/framework";
-import { SubCommandPluginCommand } from "@sapphire/plugin-subcommands";
+import { Args, Command, CommandOptions, PieceContext, PreconditionEntryResolvable } from "@sapphire/framework";
+import { SubCommandEntry, SubCommandPluginCommand } from "@sapphire/plugin-subcommands";
+import { Message } from "discord.js";
 import { sep } from "path";
 import { provider } from "../db";
+import { EmbedConstructor } from "../embed";
 
 export abstract class KiraCommand extends SubCommandPluginCommand {
     hidden?: boolean;
     owner?: boolean;
+    options: KiraCommandOptions;
     constructor(context: PieceContext, options: KiraCommandOptions) {
+        if(options.subCommands) {
+            (options.subCommands as any).push({input: "show", default: true});
+        }
+        
+        if(!options.preconditions) options.preconditions = [];
+
+        (options.preconditions as PreconditionEntryResolvable[]).push("isBlacklisted");
+
         super(context, options);
 
         this.hidden = options.hidden ?? false;
         this.owner = options.owner ?? false;
-        
-        if(this.description.length < 1) this.description = "None";
-        // if(!options.preconditions) options.preconditions = [];
-        
-        // (options.preconditions as PreconditionEntryResolvable[]).push({name: "Cooldown", context: {
-        //     delay: 1000
-        // }});
+        this.description = this.description.length < 1 ? "None" : this.description;
+
+        this.options = options;
+    }
+
+    public show(msg: Message, args: Args) {
+        let embed = new EmbedConstructor()
+        .setTitle("Help")
+        .setDescription(this.options.subCommands.filter(row => typeof(row) !== "object").map(row => row).join("\n"));
+
+        return msg.channel.send({embeds: [embed]});
     }
 
     public get category() {

@@ -11,8 +11,6 @@ export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
             let ownerApplication = await this.context.client.application.fetch();
 
-            console.log(this.context.client.shard);
-
             let shardCount = this.context.client.shard?.count || 0;
             let djsVersion = version;
             let commands = this.context.client.stores.get("commands").size;
