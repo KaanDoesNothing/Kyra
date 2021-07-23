@@ -20,11 +20,17 @@ export const defaultGuildSchema = (guildID: Snowflake): guildSettingsInterface =
         guild_id: guildID,
         prefix: PREFIX,
         disabled_commands: [],
-        modlog: {
-            deleted_message: {
+        settings: {
+            logs: {
+                deleted_message: {
+                    enabled: false,
+                    channel: "0"
+                } 
+            },
+            blacklisted_words: {
                 enabled: false,
-                channel: "0"
-            } 
+                list: []
+            }
         }
     }
 }

@@ -5,10 +5,16 @@ export interface guildSettingsInterface {
 	guild_id: Snowflake,
 	prefix: string,
 	disabled_commands?: any,
-	modlog: {
-		deleted_message: {
+	settings: {
+		logs: {
+			deleted_message: {
+				enabled: boolean,
+				channel?: Snowflake
+			}
+		},
+		blacklisted_words: {
 			enabled: boolean,
-			channel?: Snowflake
+			list: string[]
 		}
 	}
 }

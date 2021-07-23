@@ -2,7 +2,7 @@ import type { Message } from "discord.js";
 import { Args } from "@sapphire/framework";
 import { version } from "discord.js";
 import { EmbedConstructor } from "../../lib/embed";
-import { commandsCache } from "../../lib/cache";
+import { commandsCache, messages } from "../../lib/cache";
 import { KiraCommand } from "../../lib/structures/command";
 import {totalmem, freemem, uptime} from "os";
 import { millisToMinutesAndSeconds } from "../../lib/utils";
@@ -29,6 +29,7 @@ export class UserCommand extends KiraCommand {
             .addField("Library", `discord.js@${djsVersion}`, true)
             .addField("Commands", commands.toString(), true)
             .addField("Commands Ran", commandsCache.commands_ran.toString(), true)
+            .addField("Messages Read", messages.handled.toString(), true)
             .addField("Shards", shardCount.toString(), true)
             .addField("Uptime", millisToMinutesAndSeconds(this.context.client.uptime), true)
             .addField("Guilds", guilds.toString(), true)
