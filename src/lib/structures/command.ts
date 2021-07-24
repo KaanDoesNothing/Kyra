@@ -8,6 +8,7 @@ import { EmbedConstructor } from "../embed";
 export abstract class KiraCommand extends SubCommandPluginCommand {
     hidden?: boolean;
     owner?: boolean;
+    usage?: string
     options: KiraCommandOptions;
     constructor(context: PieceContext, options: KiraCommandOptions) {
         super(context, KiraCommand.handleOptions(options));
@@ -55,5 +56,6 @@ export abstract class KiraCommand extends SubCommandPluginCommand {
 
 export interface KiraCommandOptions extends SubCommandPluginCommand.Options {
     hidden?: boolean,
-    owner?: boolean
+    owner?: boolean,
+    usage?: string
 }
