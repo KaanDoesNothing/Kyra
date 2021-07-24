@@ -10,6 +10,16 @@ export abstract class KiraCommand extends SubCommandPluginCommand {
     owner?: boolean;
     options: KiraCommandOptions;
     constructor(context: PieceContext, options: KiraCommandOptions) {
+        super(context, KiraCommand.handleOptions(options));
+
+        this.hidden = options.hidden ?? false;
+        this.owner = options.owner ?? false;
+        this.description = this.description.length < 1 ? "None" : this.description;
+
+        this.options = options;
+    }
+
+    public static handleOptions(options: KiraCommandOptions) {
         if(options.subCommands) {
             (options.subCommands as any).push({input: "show", default: true});
         }
@@ -18,13 +28,7 @@ export abstract class KiraCommand extends SubCommandPluginCommand {
 
         (options.preconditions as PreconditionEntryResolvable[]).push("isBlacklisted");
 
-        super(context, options);
-
-        this.hidden = options.hidden ?? false;
-        this.owner = options.owner ?? false;
-        this.description = this.description.length < 1 ? "None" : this.description;
-
-        this.options = options;
+        return options;
     }
 
     public show(msg: Message, args: Args) {
