@@ -1,5 +1,5 @@
-import { Args, Command, CommandOptions, PieceContext, PreconditionEntryResolvable } from "@sapphire/framework";
-import { SubCommandEntry, SubCommandPluginCommand } from "@sapphire/plugin-subcommands";
+import { Args, PieceContext, PreconditionEntryResolvable } from "@sapphire/framework";
+import { SubCommandPluginCommand } from "@sapphire/plugin-subcommands";
 import { Message } from "discord.js";
 import { sep } from "path";
 import { provider } from "../db";
