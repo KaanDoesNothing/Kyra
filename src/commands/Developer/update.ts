@@ -17,8 +17,13 @@ export class UserCommand extends KiraCommand {
 
         if(ownerApplication.owner.id !== msg.author.id) return;
 
+        await msg.channel.send({content: "Running git pull."});
         let gitPull = await exec("git pull");
+
+        await msg.channel.send({content: "Running npm install."});
         let npmInstall = await exec("npm install");
+        
+        await msg.channel.send({content: "Running tsc."});
         let tsc = await exec("tsc");
 
         await msg.channel.send({content: "Updated, restarting!"});
