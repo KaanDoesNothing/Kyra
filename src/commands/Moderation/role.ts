@@ -5,7 +5,6 @@ import { KiraCommand, KiraCommandOptions } from "../../lib/structures/command";
 
 @ApplyOptions<KiraCommandOptions>({
     preconditions: [new PermissionsPrecondition("MANAGE_ROLES")],
-    hidden: true,
     subCommands: ["add", "remove"]
 })
 
