@@ -4,6 +4,8 @@ import { PREFIX } from "./config";
 import { provider } from "./lib/db";
 import { Client } from "./lib/client";
 import { token, intents as configIntents } from "./private.json";
+import { Message } from "discord.js";
+import { guildSettingsInterface } from "./interfaces/guild";
 
 const client = new Client({
 	intents: configIntents,
@@ -13,8 +15,8 @@ const client = new Client({
 		level: LogLevel.Trace
 	},
 	shards: "auto",
-	fetchPrefix: async (msg) => {
-		let guildSettings = await provider.get("guilds", msg.guild.id);
+	fetchPrefix: async (msg: Message) => {
+		let guildSettings: guildSettingsInterface = await provider.get("guilds", msg.guild.id);
 
 		return guildSettings.prefix;
     },

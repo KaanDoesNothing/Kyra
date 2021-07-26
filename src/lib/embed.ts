@@ -10,5 +10,8 @@ export class EmbedConstructor extends MessageEmbed {
         }else {
             this.color = DEFAULT_COLOR;
         }
+ 
+        // this.setTimestamp();
+        // this.setFooter(msg.guild.name, msg.guild.iconURL());
     }
 }

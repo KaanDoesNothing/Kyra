@@ -1,4 +1,4 @@
-export let commandsCache = {
+let commandsCache = {
     commands_ran: 0
 }
 
@@ -7,5 +7,6 @@ let messages = {
 }
 
 export {
-    messages
+    messages,
+    commandsCache
 }
