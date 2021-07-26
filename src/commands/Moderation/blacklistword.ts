@@ -49,7 +49,7 @@ export class UserCommand extends KiraCommand {
         if(!msg.member.permissions.has("MANAGE_MESSAGES")) return msg.reply({content: `You don't have the permissions to do this`});
         let guildSettings: guildSettingsInterface = await this.settings.get("guilds", msg.guild.id);
         
-        let embed = new EmbedConstructor()
+        let embed = new EmbedConstructor(msg)
         .setTitle("Blacklisted Words")
         .setDescription(guildSettings.settings.blacklisted_words.list.map(word => `${word}`).join("\n"));
 

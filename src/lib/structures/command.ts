@@ -27,13 +27,13 @@ export abstract class KiraCommand extends SubCommandPluginCommand {
         
         if(!options.preconditions) options.preconditions = [];
 
-        (options.preconditions as PreconditionEntryResolvable[]).push("isBlacklisted");
+        (options.preconditions as PreconditionEntryResolvable[]).push("isBlacklisted", "GuildOnly");
 
         return options;
     }
 
     public show(msg: Message, args: Args) {
-        let embed = new EmbedConstructor()
+        let embed = new EmbedConstructor(msg)
         .setTitle("Help")
         .setDescription(this.options.subCommands.filter(row => typeof(row) !== "object").map(row => row).join("\n"));
 
