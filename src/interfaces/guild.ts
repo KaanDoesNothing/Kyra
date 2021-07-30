@@ -15,6 +15,7 @@ export interface guildSettingsInterface {
 		blacklisted_words: {
 			enabled: boolean,
 			list: string[]
-		}
+		},
+		language: string
 	}
 }

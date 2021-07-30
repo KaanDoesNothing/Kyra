@@ -30,7 +30,8 @@ export const defaultGuildSchema = (guildID: Snowflake): guildSettingsInterface =
             blacklisted_words: {
                 enabled: true,
                 list: []
-            }
+            },
+            language: "en-US"
         }
     }
 }

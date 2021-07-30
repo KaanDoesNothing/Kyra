@@ -20,6 +20,11 @@ const client = new Client({
 
 		return guildSettings.prefix;
     },
+	fetchLanguage: async (msg: Message) => {
+		let guildSettings: guildSettingsInterface = await provider.get("guilds", msg.guild.id);
+
+		return guildSettings.settings.language;
+	},
 	api: {
 		auth: {
 			id: "",
