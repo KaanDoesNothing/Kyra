@@ -28,7 +28,7 @@
     "@sapphire/utilities": "^2.0.1",
     "axios": "^0.21.1",
     "discord-api-types": "^0.18.1",
-    "discord.js": "github:discordjs/discord.js",
+    "discord.js": "^13.0.1",
     "erela.js": "^2.3.3",
     "fastify": "^3.18.1",
     "fastify-http-proxy": "^6.0.0",

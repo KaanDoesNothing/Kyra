@@ -4,6 +4,7 @@ import { ApplyOptions } from "@sapphire/decorators";
 import { KiraCommand } from "../../lib/structures/command";
 
 @ApplyOptions<CommandOptions>({
+    enabled: false,
     preconditions: [new PermissionsPrecondition("MANAGE_MESSAGES")]
 })
 
@@ -15,8 +16,10 @@ export class UserCommand extends KiraCommand {
 
                 await msg.delete();
 
+                //@ts-ignore
                 let messages = await msg.channel.messages.fetch({ limit: amount });
 
+                //@ts-ignore
                 await (msg.channel as TextChannel).bulkDelete(messages.array().slice(0, amount));
                 
                 return msg.reply({content: `${amount} messages have been purged.`}).then((message) => {
