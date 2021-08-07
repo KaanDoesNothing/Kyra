@@ -1,10 +1,10 @@
 import { ApplyOptions } from "@sapphire/decorators";
 import type { Message } from "discord.js";
-import { CommandOptions, Args } from "@sapphire/framework";
+import { Args } from "@sapphire/framework";
 import { Client } from "../../lib/client";
-import { KiraCommand } from "../../lib/structures/command";
+import { KiraCommand, KiraCommandOptions } from "../../lib/structures/command";
 
-@ApplyOptions<CommandOptions>({
+@ApplyOptions<KiraCommandOptions>({
 	preconditions: ["voiceOnly", "playerRequired"]
 })
 
@@ -14,7 +14,7 @@ export class UserCommand extends KiraCommand {
 
         if(!volume) return msg.reply
 		
-		let musicManager = (this.context.client as Client).musicManager;
+		let musicManager = (this.container.client as Client).musicManager;
 		let player = musicManager.manager.get(msg.guild.id);
 
         player.setVolume(parseInt(volume as any));

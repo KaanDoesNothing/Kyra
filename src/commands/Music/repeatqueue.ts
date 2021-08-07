@@ -12,7 +12,7 @@ import { Player } from "erela.js";
 
 export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
-		let musicManager = (this.context.client as Client).musicManager;
+		let musicManager = (this.container.client as Client).musicManager;
 		let player: Player = musicManager.manager.get(msg.guild.id);
 
 		let isRepeating = player.queueRepeat;

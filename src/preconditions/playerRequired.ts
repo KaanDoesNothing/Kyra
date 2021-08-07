@@ -5,7 +5,7 @@ import type { Client } from "../lib/client";
 
 export class CorePrecondition extends Precondition {
     public run(msg: Message): PreconditionResult {
-        let musicManager = (this.context.client as Client).musicManager;
+        let musicManager = (this.container.client as Client).musicManager;
         let player: Player = musicManager.manager.get(msg.guild.id);
 
         return !player ? this.error({ identifier: Identifiers.ArgumentTextChannel, message: "Music isn't playing!"}) : this.ok();

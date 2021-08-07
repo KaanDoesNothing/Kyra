@@ -5,6 +5,7 @@ import type { KiraCommand } from "../lib/structures/command";
 @ApplyOptions<RouteOptions>({ route: "commands" })
 export class UserRoute extends Route {
 	public [methods.GET](_request: ApiRequest, response: ApiResponse) {
+        //@ts-ignore
         let commands = this.context.client.stores.get("commands").map((cmd: KiraCommand) => {
             return {
                 name: cmd.name,

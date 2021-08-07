@@ -5,6 +5,14 @@ import { sep } from "path";
 import { provider } from "../db";
 import { EmbedConstructor } from "../embed";
 
+declare module "@sapphire/framework" {
+    interface Preconditions {
+        voiceOnly: never,
+        playerRequired: never,
+        isBlacklisted: never
+    }
+}
+
 export abstract class KiraCommand extends SubCommandPluginCommand {
     hidden?: boolean;
     owner?: boolean;

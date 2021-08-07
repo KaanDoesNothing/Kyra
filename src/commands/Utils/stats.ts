@@ -9,27 +9,27 @@ import { millisToMinutesAndSeconds } from "../../lib/utils";
 
 export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {
-            let ownerApplication = await this.context.client.application.fetch();
+            let ownerApplication = await this.container.client.application.fetch();
 
-            let shardCount = this.context.client.shard?.count || 0;
+            let shardCount = this.container.client.shard?.count || 0;
             let djsVersion = version;
-            let commands = this.context.client.stores.get("commands").size;
+            let commands = this.container.client.stores.get("commands").size;
             let os = process.platform;
-            let guilds = this.context.client.guilds.cache.size;
-            let channels = this.context.client.channels.cache.size;
-            let users = this.context.client.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0);
+            let guilds = this.container.client.guilds.cache.size;
+            let channels = this.container.client.channels.cache.size;
+            let users = this.container.client.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0);
 
             let totalMem = totalmem() / 1024 / 1024 / 1024;
             let freeMem = freemem() / 1024 / 1024 / 1024;
             
             let embed = new EmbedConstructor(msg)
-            .addField("Owner", this.context.client.users.cache.get(ownerApplication.owner.id).tag, true)
+            .addField("Owner", this.container.client.users.cache.get(ownerApplication.owner.id).tag, true)
             .addField("Library", `discord.js@${djsVersion}`, true)
             .addField("Commands", commands.toString(), true)
             .addField("Commands Ran", commandsCache.commands_ran.toString(), true)
             .addField("Messages Read", messages.handled.toString(), true)
             .addField("Shards", shardCount.toString(), true)
-            .addField("Uptime", millisToMinutesAndSeconds(this.context.client.uptime), true)
+            .addField("Uptime", millisToMinutesAndSeconds(this.container.client.uptime), true)
             .addField("Guilds", guilds.toString(), true)
             .addField("Channels", channels.toString(), true)
             .addField("Users", users.toString(), true)

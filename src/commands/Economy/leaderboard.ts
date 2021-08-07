@@ -21,7 +21,7 @@ export class UserCommand extends KiraCommand {
         for (let row in rows) {
             let data: userSettingsInterface = rows[row];
 
-            let user = await this.context.client.users.fetch(data.id);
+            let user = await this.container.client.users.fetch(data.id);
 
             output+= `${parseInt(row) + 1}. ${user.tag}: ${data.balance}\n`;
         }

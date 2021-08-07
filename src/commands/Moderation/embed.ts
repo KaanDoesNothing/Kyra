@@ -1,13 +1,13 @@
 import type { GuildMember, Message } from "discord.js";
-import { Args, CommandOptions, PermissionsPrecondition } from "@sapphire/framework";
+import { Args, PermissionsPrecondition } from "@sapphire/framework";
 import { ApplyOptions } from "@sapphire/decorators";
-import { KiraCommand } from "../../lib/structures/command";
+import { KiraCommand, KiraCommandOptions } from "../../lib/structures/command";
 
-@ApplyOptions<CommandOptions>({
-    strategyOptions: {
-        options: ["title", "content", "color"]
-    }
-})
+// @ApplyOptions<KiraCommandOptions>({
+//     strategy: {
+//         options: ["title", "content", "color"]
+//     }
+// })
 
 export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args: Args) {

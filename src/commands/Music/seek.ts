@@ -15,7 +15,7 @@ export class UserCommand extends KiraCommand {
 
         if(time_arg.error) return msg.reply({content: "You must provide a number."});
 
-		let musicManager = (this.context.client as Client).musicManager;
+		let musicManager = (this.container.client as Client).musicManager;
 		let player: Player = musicManager.manager.get(msg.guild.id);
 
         player.seek(time_arg.value * 1000);

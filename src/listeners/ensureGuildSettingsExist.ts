@@ -1,12 +1,12 @@
-import { Event, Events, PieceContext } from "@sapphire/framework";
+import { Listener, Events, PieceContext } from "@sapphire/framework";
 import type { Message } from "discord.js";
 import { db } from "../lib/db";
 
 let alreadyChecked = [];
 
-export class messageEvent extends Event<Events.Message> {
+export class messageEvent extends Listener<typeof Events.MessageCreate> {
 	public constructor(ctx: PieceContext) {
-		super(ctx, { event: Events.Message, enabled: false });
+		super(ctx, { event: Events.MessageCreate, enabled: false });
 	}
 
 	public async run(msg: Message) {

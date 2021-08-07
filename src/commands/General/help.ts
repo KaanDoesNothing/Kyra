@@ -9,7 +9,7 @@ export class UserCommand extends KiraCommand {
 
 		let embed = new EmbedConstructor(msg);
 		
-		this.context.stores.get("commands").map((cmd: KiraCommand) => {
+		this.container.stores.get("commands").map((cmd: KiraCommand) => {
 			if(categories.includes(cmd.category)) return;
 
 			categories.push(cmd.category);
@@ -17,7 +17,7 @@ export class UserCommand extends KiraCommand {
 
 		categories.forEach((category) => {
             let commandsLine = "";
-            this.context.stores.get("commands").forEach(cmd => {
+            this.container.stores.get("commands").forEach(cmd => {
 				if((cmd as KiraCommand).category !== category || (cmd as KiraCommand).hidden === true) return;
                 commandsLine += (`\`${cmd.name}\` `);
             });

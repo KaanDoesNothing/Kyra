@@ -4,6 +4,7 @@ import { ApiRequest, ApiResponse, methods, Route, RouteOptions } from "@sapphire
 @ApplyOptions<RouteOptions>({ route: "client_info" })
 export class UserRoute extends Route {
 	public [methods.GET](_request: ApiRequest, response: ApiResponse) {
+		//@ts-ignore
 		response.json({ user: this.context.client.user.toJSON() });
 	}
 }

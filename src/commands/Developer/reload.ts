@@ -8,14 +8,14 @@ import { ApplyOptions } from "@sapphire/decorators";
 
 export class UserCommand extends KiraCommand {
 	public async run(msg: Message, args) {
-        let ownerApplication = await this.context.client.application.fetch();
+        let ownerApplication = await this.container.client.application.fetch();
 
         if(ownerApplication.owner.id !== msg.author.id) return;
 
-        let values = this.context.client.stores.values();
+        let values = this.container.client.stores.values();
 
         for (let value in values) {
-            let store = this.context.client.stores.get(value);
+            let store = this.container.client.stores.get(value);
             // await store?.load();
         }
 

@@ -22,7 +22,7 @@ export class UserCommand extends KiraCommand {
 		let value_fetched = await args.pickResult("string");
 		let value = value_fetched.value;
 
-		let musicManager = (this.context.client as Client).musicManager;
+		let musicManager = (this.container.client as Client).musicManager;
 		let player: Player = musicManager.manager.get(msg.guild.id);
 
         let level = "none";
