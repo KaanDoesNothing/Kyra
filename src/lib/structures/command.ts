@@ -7,16 +7,18 @@ import { EmbedConstructor } from "../embed";
 
 declare module "@sapphire/framework" {
     interface Preconditions {
-        voiceOnly: any,
-        playerRequired: any,
-        isBlacklisted: any
+        voiceOnly: never,
+        playerRequired: never,
+        isBlacklisted: never
     }
 }
 
 export abstract class KiraCommand extends SubCommandPluginCommand {
     hidden?: boolean;
     owner?: boolean;
-    usage?: string
+    usage?: string;
+    description: string;
+    name: string;
     options: KiraCommandOptions;
     constructor(context: PieceContext, options: KiraCommandOptions) {
         super(context, KiraCommand.handleOptions(options));

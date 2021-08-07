@@ -7,6 +7,13 @@ import { token, intents as configIntents } from "./private.json";
 import { Message } from "discord.js";
 import { guildSettingsInterface } from "./interfaces/guild";
 
+// declare module "@sapphire/pieces" {
+// 	interface StoreRegistry {
+// 		get<any>(key: any): StoreRegistry[K];
+// 		has(key: Key): true;
+// 	}
+// }
+
 const client = new Client({
 	intents: configIntents,
 	defaultPrefix: PREFIX,
