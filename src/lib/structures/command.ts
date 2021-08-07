@@ -7,9 +7,9 @@ import { EmbedConstructor } from "../embed";
 
 declare module "@sapphire/framework" {
     interface Preconditions {
-        voiceOnly: never,
-        playerRequired: never,
-        isBlacklisted: never
+        voiceOnly: any,
+        playerRequired: any,
+        isBlacklisted: any
     }
 }
 
