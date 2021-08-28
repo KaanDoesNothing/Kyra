@@ -1,10 +1,10 @@
-import type { GuildMember, Message, TextChannel } from "discord.js";
-import { Args, PermissionsPrecondition } from "@sapphire/framework";
+import type { Message, TextChannel } from "discord.js";
+import { Args, ClientPermissionsPrecondition } from "@sapphire/framework";
 import { KiraCommand, KiraCommandOptions } from "../../lib/structures/command";
 import { ApplyOptions } from "@sapphire/decorators";
 
 @ApplyOptions<KiraCommandOptions>({
-    preconditions: [new PermissionsPrecondition("MANAGE_GUILD")]
+    preconditions: [new ClientPermissionsPrecondition("MANAGE_GUILD")]
 })
 
 export class UserCommand extends KiraCommand {

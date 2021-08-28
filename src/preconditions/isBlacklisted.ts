@@ -7,6 +7,6 @@ export class CorePrecondition extends Precondition {
     public async run(msg: Message): AsyncPreconditionResult {
         let settings: userSettingsInterface = await provider.get("users", msg.author.id);
 
-        return settings.blacklisted ? this.error({ identifier: Identifiers.ArgumentTextChannel, message: "You're blacklisted."}) : this.ok();
+        return settings.blacklisted ? this.error({ identifier: Identifiers.PreconditionGuildTextOnly, message: "You're blacklisted."}) : this.ok();
     }
 }

@@ -1,5 +1,5 @@
 import type { GuildMember, Message } from "discord.js";
-import { Args, CommandOptions, PermissionsPrecondition } from "@sapphire/framework";
+import { Args, CommandOptions } from "@sapphire/framework";
 import { ApplyOptions } from "@sapphire/decorators";
 import { EmbedConstructor } from "../../lib/embed";
 import { KiraCommand } from "../../lib/structures/command";

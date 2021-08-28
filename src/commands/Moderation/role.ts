@@ -1,10 +1,10 @@
 import type { GuildMember, Message, Role } from "discord.js";
-import { Args, PermissionsPrecondition } from "@sapphire/framework";
+import { Args, ClientPermissionsPrecondition } from "@sapphire/framework";
 import { ApplyOptions } from "@sapphire/decorators";
 import { KiraCommand, KiraCommandOptions } from "../../lib/structures/command";
 
 @ApplyOptions<KiraCommandOptions>({
-    preconditions: [new PermissionsPrecondition("MANAGE_ROLES")],
+    preconditions: [new ClientPermissionsPrecondition("MANAGE_ROLES")],
     subCommands: ["add", "remove"]
 })
 

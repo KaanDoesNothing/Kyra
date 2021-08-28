@@ -8,6 +8,6 @@ export class CorePrecondition extends Precondition {
         let musicManager = (this.container.client as Client).musicManager;
         let player: Player = musicManager.manager.get(msg.guild.id);
 
-        return !player ? this.error({ identifier: Identifiers.ArgumentTextChannel, message: "Music isn't playing!"}) : this.ok();
+        return !player ? this.error({ identifier: Identifiers.PreconditionGuildTextOnly, message: "Music isn't playing!"}) : this.ok();
     }
 }

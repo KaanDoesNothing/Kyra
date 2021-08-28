@@ -1,10 +1,10 @@
 import type { GuildMember, Message } from "discord.js";
-import { Args, CommandOptions, PermissionsPrecondition } from "@sapphire/framework";
+import { Args, ClientPermissionsPrecondition } from "@sapphire/framework";
 import { ApplyOptions } from "@sapphire/decorators";
-import { KiraCommand } from "../../lib/structures/command";
+import { KiraCommand, KiraCommandOptions } from "../../lib/structures/command";
 
-@ApplyOptions<CommandOptions>({
-	preconditions: [new PermissionsPrecondition("BAN_MEMBERS")]
+@ApplyOptions<KiraCommandOptions>({
+	preconditions: [new ClientPermissionsPrecondition("BAN_MEMBERS")]
 })
 
 export class UserCommand extends KiraCommand {

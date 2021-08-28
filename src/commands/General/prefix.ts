@@ -1,14 +1,13 @@
 import { ApplyOptions } from "@sapphire/decorators";
 import type { Message } from "discord.js";
-import { CommandOptions, Args } from "@sapphire/framework";
-import { PermissionsPrecondition } from "@sapphire/framework";
+import { CommandOptions, Args, UserPermissionsPrecondition } from "@sapphire/framework";
 import { provider } from "../../lib/db";
 import { KiraCommand } from "../../lib/structures/command";
 
 @ApplyOptions<CommandOptions>({
 	aliases: ["setprefix"],
 	description: "Sets the prefix.",
-	preconditions: [new PermissionsPrecondition("MANAGE_GUILD")]
+	preconditions: [new UserPermissionsPrecondition("MANAGE_GUILD")]
 })
 
 export class UserCommand extends KiraCommand {
