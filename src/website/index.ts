@@ -38,12 +38,8 @@ export default async (client: Client) => {
 
         if(!user) return {error: "Couldn't fetch user!"};
 
-        console.log(user);
-
         //@ts-ignore
         const token = app.jwt.sign({user});
-
-        console.log(token);
 
         return {token};
     });
@@ -54,6 +50,10 @@ export default async (client: Client) => {
             channels: client.guilds.cache.reduce((prev, next) => prev + next.channels.cache.size, 0),
             users: client.guilds.cache.reduce((prev, next) => prev + next.memberCount, 0)
         }
+    });
+
+    app.get("/api/client/info", async (req: request, res) => {
+        return client.user.toJSON();
     });
 
     //@ts-ignore
