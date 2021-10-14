@@ -19,7 +19,7 @@ const client = new Client({
 	defaultPrefix: PREFIX,
 	caseInsensitiveCommands: true,
 	logger: {
-		level: LogLevel.Trace
+		level: LogLevel.Warn
 	},
 	shards: "auto",
 	fetchPrefix: async (msg: Message) => {

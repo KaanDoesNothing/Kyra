@@ -51,12 +51,7 @@ export abstract class KiraCommand extends SubCommandPluginCommand {
     }
 
     public get category() {
-        const path = this.path;
-
-        const splittedPath = path.split(sep);
-        const finalPath = splittedPath.slice(splittedPath.indexOf("commands") + 1, -1);
-        
-        return finalPath[0];
+        return this.fullCategory[0];
     }
 
     public get settings() {
