@@ -8,7 +8,7 @@ import { ApplyOptions } from "@sapphire/decorators";
 })
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args: Args) {
+	public async messageRun(msg: Message, args: Args) {
         if(!msg.member.permissions.has("MANAGE_GUILD")) return msg.reply({content: `You don't have the permissions to do this!`});
 
         let time = await args.pick("number").catch(() => msg.reply({content: "You must provide the amount."}));

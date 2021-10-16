@@ -9,7 +9,7 @@ import { KiraCommand } from "../../lib/structures/command";
 })
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args: Args) {
+	public async messageRun(msg: Message, args: Args) {
         let user = await args.pick("user").catch(() => msg.author);
 
         let embed = new EmbedConstructor(msg)

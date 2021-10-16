@@ -4,7 +4,7 @@ import axios from "axios";
 import { KiraCommand } from "../../lib/structures/command";
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args) {
+	public async messageRun(msg: Message, args) {
 		let res = await axios.get("https://some-random-api.ml/img/birb");
 
 		let embed = new MessageEmbed()

@@ -9,7 +9,7 @@ import { KiraCommand } from "../../lib/structures/command";
 })
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args: Args) {
+	public async messageRun(msg: Message, args: Args) {
                 let amount = await args.rest("number") + 1;
 
                 if(!msg.member.permissions.has("MANAGE_MESSAGES")) return msg.reply({content: `You don't have the permissions to do this`});

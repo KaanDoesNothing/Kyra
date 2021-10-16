@@ -10,7 +10,7 @@ import { ApplyOptions } from "@sapphire/decorators";
 })
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args: Args) {
+	public async messageRun(msg: Message, args: Args) {
         let rows = await this.settings.db.table("users").orderBy(this.settings.db.desc("balance")).limit(25).run();
 
         let embed = new EmbedConstructor(msg)

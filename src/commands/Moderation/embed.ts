@@ -10,7 +10,7 @@ import { KiraCommand, KiraCommandOptions } from "../../lib/structures/command";
 // })
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args: Args) {
+	public async messageRun(msg: Message, args: Args) {
         let title = args.getOption("title");
         let content = args.getOption("content");
         let color = args.getOption("color");

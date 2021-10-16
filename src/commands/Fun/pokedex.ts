@@ -10,7 +10,7 @@ import axios from "axios";
 })
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args: Args) {
+	public async messageRun(msg: Message, args: Args) {
         let input = await args.pick("string").catch(() => msg.reply({content: "Provide a pokemon name."}));
         if(!input) return;
 

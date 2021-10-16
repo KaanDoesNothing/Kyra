@@ -9,7 +9,7 @@ import { KiraCommand, KiraCommandOptions } from "../../lib/structures/command";
 })
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args) {
+	public async messageRun(msg: Message, args) {
 		const message = await msg.channel.send("Ping...");
 		return msg.channel.send(`Pong! Took: ${message.createdTimestamp - msg.createdTimestamp}ms!`);
 	}

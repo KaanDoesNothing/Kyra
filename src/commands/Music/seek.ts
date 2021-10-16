@@ -10,7 +10,7 @@ import { Player } from "erela.js";
 })
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args: Args) {
+	public async messageRun(msg: Message, args: Args) {
         let time_arg = await args.pickResult("number");
 
         if(time_arg.error) return msg.reply({content: "You must provide a number."});

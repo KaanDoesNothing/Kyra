@@ -18,7 +18,7 @@ const levels = {
 })
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args: Args) {
+	public async messageRun(msg: Message, args: Args) {
 		let value_fetched = await args.pickResult("string");
 		let value = value_fetched.value;
 

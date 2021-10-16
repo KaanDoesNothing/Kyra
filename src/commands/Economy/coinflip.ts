@@ -9,7 +9,7 @@ import { KiraCommand, KiraCommandOptions } from "../../lib/structures/command";
 })
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args: Args) {
+	public async messageRun(msg: Message, args: Args) {
         const amount = await args.pick("number").catch(err => msg.reply({content: "Provide the amount you want to bet."}));
         if(!amount) return;
 

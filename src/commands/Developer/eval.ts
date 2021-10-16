@@ -10,7 +10,7 @@ import { ApplyOptions } from "@sapphire/decorators";
 })
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args) {
+	public async messageRun(msg: Message, args) {
         const code = await args.rest("string");
         let ownerApplication = await this.container.client.application.fetch();
 

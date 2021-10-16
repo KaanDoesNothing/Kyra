@@ -9,7 +9,7 @@ import { KiraCommand } from "../../lib/structures/command";
 })
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args: Args) {
+	public async messageRun(msg: Message, args: Args) {
 		let musicManager = (this.container.client as Client).musicManager;
 		let player = musicManager.manager.get(msg.guild.id);
 

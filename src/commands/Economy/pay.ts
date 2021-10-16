@@ -9,7 +9,7 @@ import type { userSettingsInterface } from "../../interfaces/user";
 })
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args: Args) {
+	public async messageRun(msg: Message, args: Args) {
         let user = await args.pick("user");
         let amount: number = await args.pick("number");
 

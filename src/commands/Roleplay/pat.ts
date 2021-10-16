@@ -5,7 +5,7 @@ import { nekoClient } from "../../lib/nekosLife";
 import { rolePlayEmbed } from "../../lib/embeds/roleplayEmbed";
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args: Args) {
+	public async messageRun(msg: Message, args: Args) {
         let user = await args.pick("user").catch(() => msg.author);
 
         let url = (await nekoClient.sfw.hug()).url;

@@ -3,7 +3,7 @@ import { CommandOptions } from "@sapphire/framework";
 import { KiraCommand } from "../../lib/structures/command";
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args) {
+	public async messageRun(msg: Message, args) {
 		let question = await args.rest("string").catch(err => {
 			return;
 		});

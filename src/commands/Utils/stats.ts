@@ -8,7 +8,7 @@ import {totalmem, freemem, uptime} from "os";
 import { millisToMinutesAndSeconds } from "../../lib/utils";
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args: Args) {
+	public async messageRun(msg: Message, args: Args) {
             let ownerApplication = await this.container.client.application.fetch();
 
             let shardCount = this.container.client.shard?.count || 0;

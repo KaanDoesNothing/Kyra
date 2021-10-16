@@ -5,7 +5,7 @@ import { KiraCommand } from "../../lib/structures/command";
 import { EmbedConstructor } from "../../lib/embed";
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args: Args) {
+	public async messageRun(msg: Message, args: Args) {
         let user = await args.pick("user").catch(() => msg.author);
 
         let url = `https://some-random-api.ml/canvas/gay?avatar=${user.displayAvatarURL({format: "png"})}`;

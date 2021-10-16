@@ -5,7 +5,7 @@ import { userSettingsInterface } from "../../interfaces/user";
 import { ECONOMY_DAILY_COOLDOWN, ECONOMY_DAILY_REWARD } from "../../config";
 
 export class UserCommand extends KiraCommand {
-	public async run(msg: Message, args: Args) {
+	public async messageRun(msg: Message, args: Args) {
                 let userSettings: userSettingsInterface = await this.settings.get("users", msg.author.id);
 
                 if((Date.now() - userSettings.timeout_daily) > ECONOMY_DAILY_COOLDOWN) {
