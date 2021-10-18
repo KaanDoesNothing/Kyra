@@ -8,7 +8,7 @@ export class UserEvent extends Listener<typeof Events.ClientReady> {
 	public async run() {
         server(this.container.client as Client);
 
-		this.container.client.user.setPresence({ activities: [{ name: `${PREFIX}Help, ${this.container.client.guilds.cache.size} Servers`, url: `https://www.twitch.tv/${this.container.client.user.username}`, type: 1 } ]});
+		(this.container.client as Client).updateStatus();
 
 		let musicManager = (this.container.client as Client).musicManager;
 

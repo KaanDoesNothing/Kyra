@@ -14,7 +14,6 @@ export default async (client: Client) => {
     app.decorate("isAuthenticated", async (req: request, res) => {
         try {
             await req.jwtVerify();
-            // console.log(req.user.user);
             await client.users.fetch(req.user.user.id);
         } catch (err) {
             res.send(err)
@@ -66,6 +65,8 @@ export default async (client: Client) => {
         //@ts-ignore
         let guilds = client.guilds.cache.filter(guild => guild.members.fetch(req.user.user.id));
 
+        guilds = guilds.filter(guild => guild.members.cache.get(req.user.user.id).permissions.has("ADMINISTRATOR"));
+
         return {guilds};
 
     });
@@ -85,7 +86,6 @@ export default async (client: Client) => {
 
         return {user};
     });
-
 
     app.listen(3005).then(() => console.log("Server started")).catch(err => console.log("Web server already running!"));
 }
