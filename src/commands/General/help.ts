@@ -4,7 +4,7 @@ import { EmbedConstructor } from "../../lib/embed";
 import { KiraCommand } from "../../lib/structures/command";
 
 export class UserCommand extends KiraCommand {
-	public run(msg: Message, args) {
+	public messageRun(msg: Message, args) {
 		let categories: string[] = [];
 
 		let embed = new EmbedConstructor(msg);
