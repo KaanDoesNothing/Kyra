@@ -59,13 +59,24 @@ export default (client: Client) => {
         const token = jwt.sign({user}, "amazingSecret");
 
         ctx.body = {token: token}
-    })
+    });
 
     router.use(koaJWT({secret: secret}));
 
     router.get("/api/auth/session", (ctx) => {
         ctx.body = {session: ctx.state.user};
     });
+
+    router.get("/api/auth/getUserGuilds", async (ctx) => {
+        let userID = ctx.state.user.user.id;
+        //@ts-ignore
+        let guilds = client.guilds.cache.filter(guild => guild.members.fetch(userID));
+
+        // guilds = guilds.filter(guild => guild.members.cache.get(userID).permissions.has("ADMINISTRATOR"));
+
+        ctx.body = {guilds}
+    });
+
 
     app.use(router.routes());
     app.use(router.allowedMethods());
