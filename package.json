@@ -39,7 +39,7 @@
     "i": "^0.3.6",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.4",
-    "koa-body": "^4.2.0",
+    "koa-body": "KaanDoesNothing/koa-body",
     "koa-json": "^2.0.2",
     "koa-jwt": "^4.0.3",
     "koa-router": "^10.1.1",
