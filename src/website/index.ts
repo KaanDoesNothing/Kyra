@@ -90,6 +90,26 @@ export default (client: Client) => {
         ctx.body = {guilds}
     });
 
+    router.post("/api/dashboard/getGuild", async (ctx) => {
+        let guildID = ctx.request.body.id;
+
+        let guild = client.guilds.cache.get(guildID);
+
+        if(!guild) return ctx.body = {error: "Invalid guild"};
+
+        ctx.body = {guild}
+    });
+
+    router.post("/api/dashboard/getUser", async (ctx) => {
+        let userID = ctx.request.body.id;
+
+        let user = await client.users.fetch(userID);
+
+        if(!user) return ctx.body = {error: "Invalid guild"};
+
+        ctx.body = {user}
+    });
+
 
     app.use(router.routes());
     app.use(router.allowedMethods());
