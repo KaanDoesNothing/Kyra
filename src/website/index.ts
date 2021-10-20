@@ -32,7 +32,16 @@ export default (client: Client) => {
     });
 
     router.get("/api/client/info", (ctx) => {
-        ctx.body = client.user.toJSON();
+        let clientInfo = client.user.toJSON();
+        let commands = client.stores.get("commands").map(command => {
+            return {
+                name: command.name,
+                category: command.category[0]
+            }
+        });
+
+        // @ts-ignore
+        ctx.body = {...clientInfo, commands: commands};
     });
 
     // router.use((ctx, next) => {
