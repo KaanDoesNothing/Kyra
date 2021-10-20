@@ -1,11 +1,14 @@
 import koa from "koa";
 import koaRouter from "koa-router";
+import koaCors from "@koa/cors";
 import {Client} from "../lib/client";
 import {authClient} from "./oauth";
 import {request} from "../interfaces/website";
 
 export default (client: Client) => {
     const app = new koa();
+
+    app.use(koaCors());
 
     const router = new koaRouter();
 
