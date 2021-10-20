@@ -52,11 +52,24 @@ export default (client: Client) => {
 
         if(!userKey) return {error: "Invalid code!"};
 
-        const user: object | undefined = await authClient.users.fetch(userKey).catch(err => undefined);
+        const user: any = await authClient.users.fetch(userKey).catch(err => undefined);
+        const guilds: any = await authClient.guilds.fetch(userKey).catch(err => undefined);
 
         if(!user) return {error: "Couldn't fetch user!"};
 
-        const token = jwt.sign({user}, "amazingSecret");
+        const finalGuilds = [];
+
+        guilds.forEach(guild => {
+            let cachedGuild = client.guilds.cache.get(guild.id);
+
+            if(cachedGuild) finalGuilds.push(guild);
+        });
+
+        let cachedUser = await client.users.fetch(user.id);
+
+        let finalUser = {...cachedUser, guilds: finalGuilds};
+
+        const token = jwt.sign({user: finalUser}, secret);
 
         ctx.body = {token: token}
     });
