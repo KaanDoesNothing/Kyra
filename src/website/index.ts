@@ -83,7 +83,7 @@ export default (client: Client) => {
     router.get("/api/auth/getUserGuilds", async (ctx) => {
         let userID = ctx.state.user.user.id;
         //@ts-ignore
-        let guilds = client.guilds.cache.filter(guild => guild.members.fetch(userID));
+        let guilds = client.guilds.cache.filter(guild => guild.members.cache.get(userID));
 
         // guilds = guilds.filter(guild => guild.members.cache.get(userID).permissions.has("ADMINISTRATOR"));
 
