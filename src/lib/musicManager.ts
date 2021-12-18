@@ -13,15 +13,15 @@ export class musicManager {
         this.players = [];
 
         this.manager = new Manager({
-            nodes: lavalink.nodes.map((node: any) => {
-                node.pass = node.pass.toString();
-
-                return node
-            }),
-            // nodes: [
+            // nodes: lavalink.nodes.map((node: any) => {
+            //     node.pass = node.pass.toString();
             //
-            //     { host: "localhost", port: 8341, password: "0751" }
-            // ],
+            //     return node
+            // }),
+            nodes: [
+
+                { host: "localhost", port: 8341, password: "0751" }
+            ],
             send(id, payload) {
                 const guild = client.guilds.cache.get(id as any);
 
