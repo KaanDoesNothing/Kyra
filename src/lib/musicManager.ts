@@ -1,6 +1,8 @@
 import { Client } from "./client";
 import { Manager } from "erela.js";
 
+import {lavalink} from "../private.json";
+
 export class musicManager {
     public client: Client;
     public players: Array<String>;
@@ -11,9 +13,11 @@ export class musicManager {
         this.players = [];
 
         this.manager = new Manager({
-            nodes: [
-                { host: "localhost", port: 8341, password: "0751" }
-            ],
+            nodes: lavalink.nodes,
+            // nodes: [
+            //
+            //     { host: "localhost", port: 8341, password: "0751" }
+            // ],
             send(id, payload) {
                 const guild = client.guilds.cache.get(id as any);
 
