@@ -13,7 +13,11 @@ export class musicManager {
         this.players = [];
 
         this.manager = new Manager({
-            nodes: lavalink.nodes,
+            nodes: lavalink.nodes.map((node: any) => {
+                node.pass = node.pass.toString();
+
+                return node
+            }),
             // nodes: [
             //
             //     { host: "localhost", port: 8341, password: "0751" }
