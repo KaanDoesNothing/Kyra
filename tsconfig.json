@@ -7,10 +7,12 @@
     "sourceMap": false,
     "experimentalDecorators": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "node_modules_old"
   ],
-  "include": [ "." ],
+  "include": [ "." ]
 }
