@@ -24,7 +24,7 @@ export class settingsProvider {
 
     public async _get(table: string, id: string) {
         let fetched = await tables[table].findOne({where: {id: id}});
-        console.log("fetched", fetched)
+        // console.log("fetched", fetched)
 
         let merged = mergeDefault(this.tables[table](id), JSON.parse(fetched?.data || "{}"));
 
