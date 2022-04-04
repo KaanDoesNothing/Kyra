@@ -16,6 +16,9 @@ export interface guildSettingsInterface {
 			enabled: boolean,
 			list: string[]
 		},
-		language: string
+		language: string,
+		music: {
+			playlists: [{name: string, tracks: Object[]}?]
+		}
 	}
 }

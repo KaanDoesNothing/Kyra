@@ -9,7 +9,8 @@
   "scripts": {
     "run": "cd dist && node kira.js",
     "build": "tsc --build",
-    "clean": "tsc --build --clean"
+    "clean": "tsc --build --clean",
+    "watch": "tsc --watch"
   },
   "devDependencies": {
     "@types/node": "^14.14.7",
@@ -43,6 +44,7 @@
     "koa-json": "^2.0.2",
     "koa-jwt": "^4.0.3",
     "koa-router": "^10.1.1",
+    "mysql2": "^2.3.3",
     "nekos.life": "^2.0.7",
     "node-abort-controller": "^2.0.0",
     "npm": "^7.20.0",
@@ -50,6 +52,7 @@
     "pug": "^3.0.2",
     "rethinkdb-ts": "2.4.16",
     "systeminformation": "^5.7.7",
+    "typeorm": "^0.3.4",
     "undici": "^4.1.1"
   }
 }

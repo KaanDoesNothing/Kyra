@@ -13,6 +13,7 @@ export class UserEvent extends Listener<typeof Events.MessageCreate> {
     
     private async handleBlacklistedWords(msg: Message) {
         let guildSettings: guildSettingsInterface = await provider.get("guilds", msg.guild.id);
+        // console.log(guildSettings);
         let {enabled, list} = guildSettings.settings.blacklisted_words;
 
         if(enabled) {
