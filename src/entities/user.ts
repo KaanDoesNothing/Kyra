@@ -9,7 +9,7 @@ export class User extends BaseEntity {
     @Column("varchar")
     id: string;
 
-    @Column("json")
+    @Column("longtext")
     data: guildSettingsInterface;
 
     @CreateDateColumn()
