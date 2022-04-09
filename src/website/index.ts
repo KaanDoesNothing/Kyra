@@ -23,11 +23,11 @@ export default (client: Client) => {
         ctx.body = {message: "Hmmm"}
     });
 
-    router.get("/api/client/stats", (ctx) => {
+    router.get("/api/client/stats", async (ctx) => {
         ctx.body = {
-            guilds: client.guilds.cache.size,
-            channels: client.guilds.cache.reduce((prev, next) => prev + next.channels.cache.size, 0),
-            users: client.guilds.cache.reduce((prev, next) => prev + next.memberCount, 0)
+            guilds: await client.shardManager.getGuildCount(),
+            channels: await client.shardManager.getChannelCount(),
+            users: await client.shardManager.getUserCount()
         }
     });
 
