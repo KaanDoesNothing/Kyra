@@ -4,6 +4,8 @@ import { mergeDefault } from "@sapphire/utilities";
 import {Guild} from "../entities/guild";
 import {User} from "../entities/user";
 
+import ioRedis from "ioredis";
+
 let tables = {
     "guilds": Guild,
     "users": User
@@ -12,19 +14,19 @@ let tables = {
 export class settingsProvider {
     public db: typeof db;
     private tables: string[];
-    private cache: [Map<string, object>?];
+    // private cache: [Map<string, object>?];
+    private cache: any;
     private client: Client;
     constructor() {
         this.db = db;
 
         this.tables = [];
 
-        this.cache = [];
+        this.cache = new ioRedis({port: 6888});
     }
 
     public async _get(table: string, id: string) {
         let fetched = await tables[table].findOne({where: {id: id}});
-        // console.log("fetched", fetched)
 
         let merged = mergeDefault(this.tables[table](id), JSON.parse(fetched?.data || "{}"));
 
@@ -32,53 +34,20 @@ export class settingsProvider {
     }
 
     public async get(table: string, id: string) {
-        let cached = this.getCache(table, id);
+        let cached = await this.getCache(table, id);
 
         if(cached) return cached;
 
-        let fetched = this._get(table, id);
+        let fetched = await this._get(table, id);
 
-        this.setCache(table, id, fetched);
+        await this.setCache(table, id, fetched);
 
         return fetched;
-
-        // if(!this.tables[table]) return console.log(`Table: ${table} Doesn't exist!`);
-        // if(!this.cache[table]) return console.log(`Cache: ${table} Doesn't exist!`);
-        //
-        // let data: any;
-        //
-        // if(this.getCache(table, id)) {
-        //     data = this.getCache(table, id);
-        // }else {
-        //     let fetched = await tables[table].findOne({where: {id: id}}).catch(err => console.log(err)).then(res => res.data);
-        //
-        //     console.log(fetched);
-        //
-        //     if(fetched) {
-        //         data = fetched;
-        //     }else {
-        //         let dbTable = tables[table];
-        //         let newRow = dbTable.create({id, data: this.tables[table](id)});
-        //
-        //         await newRow.save();
-        //
-        //         data = this.tables[table](id)
-        //     }
-        // }
-        //
-        // let result = mergeDefault(this.tables[table](id), data ?? {});
-        //
-        // this.setCache(table, id, result);
-        //
-        // // console.log("Result", result);
-        //
-        // return result;
     }
 
     public async set(table: string, id: string, object) {
-        console.log("Set", object);
-
         let exists = await tables[table].findOne({where: {id: id}});
+
         if(exists) {
             let dbTable = tables[table];
 
@@ -90,12 +59,9 @@ export class settingsProvider {
             await newRow.save();
         }
 
-        await this.get(table, id);
-        // this.setCache(table, id, object);
-        //
-        // return await tables[table].updateOne({where: {id: object.id}}, object);
+        await this.setCache(table, id, object);
 
-        // return await db.table(table).insert(object, {conflict: "update", returnChanges: false}).run();
+        await this.get(table, id);
     }
 
     public async ensure(table: string, id: string) {
@@ -113,25 +79,25 @@ export class settingsProvider {
     public async addTable(table: string, default_data) {
         this.tables[table] = default_data;
 
-        this.cache[table] = new Map();   
+        // this.cache[table] = new Map();
+    }
 
-        let tableExists = true
+    public async getCache(table: string, id: string) {
+        let cached = await this.cache.get(`${table}.${id}`);
 
-        if(!tableExists) {
-            await this.db.tableCreate(table).run();
-    
-            console.log(`DB - Table: ${table} has been created.`);
+        console.log(cached);
+
+        if(cached) {
+            return JSON.parse(cached);
         }else {
-            console.log(`DB - Table: ${table} exists.`);
+            return;
         }
+        // return this.cache[table].get(id);
     }
 
-    public getCache(table: string, id: string) {
-        return this.cache[table].get(id);
-    }
-
-    public setCache(table: string, id: string, data) {
-        return this.cache[table].set(id, data);
+    public async setCache(table: string, id: string, data) {
+        return await this.cache.set(`${table}.${id}`, JSON.stringify(data));
+        // return this.cache[table].set(id, data);
     }
 
     public setClient(client: Client) {
