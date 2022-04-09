@@ -87,8 +87,6 @@ export class settingsProvider {
     public async getCache(table: string, id: string) {
         let cached = await this.cache.get(`${table}.${id}`);
 
-        console.log(cached);
-
         if(cached) {
             return JSON.parse(cached);
         }else {
