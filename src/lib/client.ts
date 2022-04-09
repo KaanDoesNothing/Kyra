@@ -7,6 +7,7 @@ import {PREFIX} from "../config";
 import {Message} from "discord.js";
 import {guildSettingsInterface} from "../interfaces/guild";
 import {provider} from "./db";
+import {ShardUtil} from "./shardUtil";
 
 declare module "discord.js" {
     interface Client {
@@ -16,10 +17,12 @@ declare module "discord.js" {
 
 export class Client extends SapphireClient {
     public musicManager;
+    public shardManager: ShardUtil;
     constructor(options) {
         super(options);
 
         this.musicManager = new musicManager(this);
+        this.shardManager = new ShardUtil(this);
     }
 
     public updateStatus() {
