@@ -23,6 +23,8 @@ export class settingsProvider {
         this.tables = [];
 
         this.cache = new ioRedis({port: 6888});
+
+        this.cache.flushdb().then(console.log("Cache was flushed"));
     }
 
     public async _get(table: string, id: string) {
