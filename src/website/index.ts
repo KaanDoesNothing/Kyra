@@ -8,6 +8,8 @@ import {Client} from "../lib/client";
 import {authClient} from "./oauth";
 import {request} from "../interfaces/website";
 import {stat} from "fs";
+import {KiraCommand} from "../lib/structures/command";
+import {BitField} from "discord.js";
 
 const secret = "amazingSecret";
 
@@ -34,11 +36,34 @@ export default (client: Client) => {
     router.get("/api/client/info", (ctx) => {
         let clientInfo = client.user.toJSON();
         let commands = client.stores.get("commands").map(command => {
+            if((command as KiraCommand).hidden === true) return;
+
+            // let userPermissions = [];
+            //
+            // let preconditions = command.preconditions;
+            //
+            // for (let i in preconditions) {
+            //     let precondition = preconditions[i];
+            //
+            //     if(precondition.length) {
+            //         precondition.forEach(precondition => {
+            //            if(precondition.name === "UserPermissions") {
+            //                console.log(precondition);
+            //
+            //                console.log(new BitField(precondition.context.permissions.bitfield));
+            //            }
+            //         });
+            //     }
+            //     // console.log(preconditions[i]);
+            // }
+
             return {
                 name: command.name,
-                category: command.category[0]
+                category: command.category,
+                aliases: command.aliases,
+                description: command.description
             }
-        });
+        }).filter(command => command);
 
         // @ts-ignore
         ctx.body = {...clientInfo, commands: commands};
