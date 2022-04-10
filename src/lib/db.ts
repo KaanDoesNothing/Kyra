@@ -1,17 +1,19 @@
 import { Snowflake } from "discord.js";
-import { r } from "rethinkdb-ts";
+// import { r } from "rethinkdb-ts";
 import { DB_NAME, PREFIX } from "../config";
 import { guildSettingsInterface } from "../interfaces/guild";
 import { userSettingsInterface } from "../interfaces/user";
 import {settingsProvider} from "./settingsProvider";
-import {createConnection} from "typeorm";
+import {Connection, createConnection} from "typeorm";
 import fs from "fs/promises";
 import {Guild} from "../entities/guild";
 import {User} from "../entities/user";
 
+let connection: Connection;
+
 (async () => {
     let configFile = JSON.parse(await fs.readFile("./dist/private.json", "utf-8"));
-    await createConnection({
+    connection = await createConnection({
         ...configFile.db,
         entities: [Guild, User]
     });
@@ -20,7 +22,9 @@ import {User} from "../entities/user";
     provider.addTable("users", (id) => defaultUserSchema(id));
 })();
 
-export const db = r;
+export const db = connection;
+
+// export const db = r;
 
 // r.connectPool({ db: DB_NAME }).then(() => {
 //     provider.addTable("guilds", (id) => defaultGuildSchema(id));

@@ -10,16 +10,16 @@ export class messageEvent extends Listener<typeof Events.MessageCreate> {
 	}
 
 	public async run(msg: Message) {
-		if (alreadyChecked.includes(msg.guild.id)) return;
-
-		let guildSettings: any = (await db.table("guilds").filter({ guild_id: msg.guild.id }).run());
-
-		if (!guildSettings) {
-			let newGuildSettings = { guild_id: msg.guild.id, prefix: "$" };
-
-			await db.table("guilds").insert(newGuildSettings).run();
-		}
-
-		alreadyChecked.push(msg.guild.id);
+		// if (alreadyChecked.includes(msg.guild.id)) return;
+		//
+		// let guildSettings: any = (await db.table("guilds").filter({ guild_id: msg.guild.id }).run());
+		//
+		// if (!guildSettings) {
+		// 	let newGuildSettings = { guild_id: msg.guild.id, prefix: "$" };
+		//
+		// 	await db.table("guilds").insert(newGuildSettings).run();
+		// }
+		//
+		// alreadyChecked.push(msg.guild.id);
 	}
 }
