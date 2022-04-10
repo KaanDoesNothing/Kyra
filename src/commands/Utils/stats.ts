@@ -20,6 +20,9 @@ export class UserCommand extends KiraCommand {
             let channels = await (this.container.client as Client).shardManager.getChannelCount();
             let users = await (this.container.client as Client).shardManager.getUserCount();
 
+            let commandsRan = await (this.container.client as Client).shardManager.getExecutedCommands();
+            let messagesRead = await (this.container.client as Client).shardManager.getMessagesRead();
+
             let totalMem = totalmem() / 1024 / 1024 / 1024;
             let freeMem = freemem() / 1024 / 1024 / 1024;
             
@@ -27,8 +30,8 @@ export class UserCommand extends KiraCommand {
             .addField("Owner", this.container.client.users.cache.get(ownerApplication.owner.id).tag, true)
             .addField("Library", `discord.js@${djsVersion}`, true)
             .addField("Commands", commands.toString(), true)
-            .addField("Commands Ran", commandsCache.commands_ran.toString(), true)
-            .addField("Messages Read", messages.handled.toString(), true)
+            .addField("Commands Ran", commandsRan.toString(), true)
+            .addField("Messages Read", messagesRead.toString(), true)
             .addField("Shards", shardCount.toString(), true)
             .addField("Uptime", millisToMinutesAndSeconds(this.container.client.uptime), true)
             .addField("Guilds", guilds.toString(), true)

@@ -8,6 +8,7 @@ import {Message} from "discord.js";
 import {guildSettingsInterface} from "../interfaces/guild";
 import {provider} from "./db";
 import {ShardUtil} from "./shardUtil";
+import {commandsCache, messages} from "./cache";
 
 declare module "discord.js" {
     interface Client {
@@ -27,6 +28,14 @@ export class Client extends SapphireClient {
 
     public updateStatus() {
         this.user.setPresence({ activities: [{ name: `${PREFIX}Help, ${this.guilds.cache.size} Servers`, url: `https://www.twitch.tv/${this.user.username}`, type: 1 } ]});
+    }
+
+    public getCommandsRan() {
+        return commandsCache.commands_ran;
+    }
+
+    public getMessagesRead() {
+        return messages.handled;
     }
 
     fetchPrefix = async (msg: Message) => {

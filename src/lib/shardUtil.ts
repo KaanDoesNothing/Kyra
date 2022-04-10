@@ -30,4 +30,16 @@ export class ShardUtil {
 
         return evaled.reduce((prev, next) => prev + next, 0);
     }
+
+    async getExecutedCommands() {
+        let evaled = await this.client.shard.broadcastEval((client: Client) => client.getCommandsRan());
+
+        return evaled.reduce((prev, next) => prev + next, 0);
+    }
+
+    async getMessagesRead() {
+        let evaled = await this.client.shard.broadcastEval((client: Client) => client.getMessagesRead());
+
+        return evaled.reduce((prev, next) => prev + next, 0);
+    }
 }
