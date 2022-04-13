@@ -20,6 +20,8 @@ export class UserCommand extends KiraCommand {
 
         let warnings = await GuildWarning.find({where: {guild_id: msg.guild.id, user_id: member.value.user.id}, order: {createdAt: "DESC"}});
 
+        if(warnings.length < 1) return msg.reply("No warnings were found.");
+
         let embed = new EmbedConstructor()
             .setTitle("Warnings for " + member.value.user.tag);
 
