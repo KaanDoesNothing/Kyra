@@ -13,7 +13,7 @@ export class UserCommand extends KiraCommand {
         let user = await args.pick("user").catch(() => msg.author);
 
         let embed = new EmbedConstructor(msg)
-        .setImage(user.displayAvatarURL({dynamic: true, size: 4096}));
+        .setImage(user.displayAvatarURL({dynamic: true, size: 4096}).replace(".webp", ".png"));
 
         msg.channel.send({embeds: [embed]});
 	}
