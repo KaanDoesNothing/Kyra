@@ -3,6 +3,7 @@ import type { Args } from "@sapphire/framework";
 import { ApplyOptions } from "@sapphire/decorators";
 import { KiraCommand, KiraCommandOptions } from "../../lib/structures/command";
 import type { userSettingsInterface } from "../../interfaces/user";
+import locale from "../../lib/locale";
 
 @ApplyOptions<KiraCommandOptions>({
     aliases: ["donate", "give"]
@@ -16,7 +17,7 @@ export class UserCommand extends KiraCommand {
         let userSettings: userSettingsInterface = await this.settings.get("users", msg.author.id);
         let mentionedUserSettings: userSettingsInterface = await this.settings.get("users", user.id);
 
-        if(amount > userSettings.balance) return msg.reply({content: "You don't have enough money"});
+        if(amount > userSettings.balance) return msg.reply({content: `You don't have enough ${locale.economy.name}`});
 
         userSettings.balance -= amount;
         mentionedUserSettings.balance += amount;

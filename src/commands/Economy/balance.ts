@@ -2,6 +2,7 @@ import type { Message } from "discord.js";
 import { Args } from "@sapphire/framework";
 import { ApplyOptions } from "@sapphire/decorators";
 import { KiraCommand, KiraCommandOptions } from "../../lib/structures/command";
+import locale from "../../lib/locale";
 
 @ApplyOptions<KiraCommandOptions>({
     aliases: ["bal"]
@@ -13,6 +14,6 @@ export class UserCommand extends KiraCommand {
 
         let userSettings = await this.settings.get("users", user.id);
 
-        msg.channel.send({content: `${user.id === msg.author.id ? "You have" : `${user.tag} has`} ${userSettings.balance} coins.`});
+        msg.channel.send({content: `${user.id === msg.author.id ? "You have" : `${user.tag} has`} ${userSettings.balance} ${locale.economy.name}.`});
 	}
 }
