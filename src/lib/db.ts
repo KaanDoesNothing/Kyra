@@ -8,6 +8,7 @@ import {Connection, createConnection} from "typeorm";
 import fs from "fs/promises";
 import {Guild} from "../entities/guild";
 import {User} from "../entities/user";
+import { GuildWarning } from "../entities/guildWarning";
 
 let connection: Connection;
 
@@ -15,7 +16,7 @@ let connection: Connection;
     let configFile = JSON.parse(await fs.readFile("./dist/private.json", "utf-8"));
     connection = await createConnection({
         ...configFile.db,
-        entities: [Guild, User]
+        entities: [Guild, User, GuildWarning]
     });
 
     provider.addTable("guilds", (id) => defaultGuildSchema(id));

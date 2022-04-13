@@ -16,7 +16,9 @@ export class UserCommand extends KiraCommand {
 
         for (let value in values) {
             let store = this.container.client.stores.get(value);
-            // await store?.load();
+
+            //@ts-ignore
+            await store?.reload();
         }
 
         return msg.reply({content: "Reloaded."})

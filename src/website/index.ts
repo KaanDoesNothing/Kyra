@@ -61,7 +61,7 @@ export default (client: Client) => {
                 name: command.name,
                 category: command.category,
                 aliases: command.aliases,
-                description: command.description
+                description: command.description,
             }
         }).filter(command => command);
 
