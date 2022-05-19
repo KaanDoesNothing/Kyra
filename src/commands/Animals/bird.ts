@@ -1,5 +1,4 @@
 import { Message, MessageEmbed } from "discord.js";
-import { CommandOptions } from "@sapphire/framework";
 import axios from "axios";
 import { KiraCommand } from "../../lib/structures/command";
 

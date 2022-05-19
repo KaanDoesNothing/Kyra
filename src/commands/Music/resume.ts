@@ -1,6 +1,6 @@
 import { ApplyOptions } from "@sapphire/decorators";
 import type { Message } from "discord.js";
-import { CommandOptions, Args, Precondition } from "@sapphire/framework";
+import {CommandOptions, Args, Precondition, ChatInputCommand} from "@sapphire/framework";
 import { Client } from "../../lib/client";
 import { KiraCommand } from "../../lib/structures/command";
 
@@ -16,5 +16,18 @@ export class UserCommand extends KiraCommand {
         player.pause(false);
 
         msg.channel.send({content: `Music has been resumed.`});
+	}
+
+	public registerApplicationCommands(registry: ChatInputCommand.Registry) {
+		registry.registerChatInputCommand((builder) => builder.setName((this.name)).setDescription(this.description));
+	}
+
+	public async chatInputRun(interaction, context: ChatInputCommand.RunContext) {
+		let musicManager = (this.container.client as Client).musicManager;
+		let player = musicManager.manager.get(interaction.guild.id);
+
+		player.pause(false);
+
+		await interaction.reply({content: `Music has been resumed.`});
 	}
 }

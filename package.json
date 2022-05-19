@@ -7,7 +7,7 @@
     "name": ""
   },
   "scripts": {
-    "run": "cd dist && node kira.js",
+    "run": "cd dist && node index.js",
     "build": "tsc --build",
     "clean": "tsc --build --clean",
     "watch": "tsc --watch"
@@ -19,7 +19,7 @@
   "dependencies": {
     "@koa/cors": "^3.1.0",
     "@sapphire/decorators": "^4.3.4-next.895ce7c.0",
-    "@sapphire/framework": "^2.4.1",
+    "@sapphire/framework": "^3.0.0-next.9e16888.0",
     "@sapphire/pieces": "^3.3.1",
     "@sapphire/plugin-api": "^3.2.1",
     "@sapphire/plugin-i18next": "^2.3.1",

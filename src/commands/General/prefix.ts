@@ -1,6 +1,6 @@
 import { ApplyOptions } from "@sapphire/decorators";
 import type { Message } from "discord.js";
-import { CommandOptions, Args, UserPermissionsPrecondition } from "@sapphire/framework";
+import {CommandOptions, Args, UserPermissionsPrecondition, ChatInputCommand} from "@sapphire/framework";
 import { provider } from "../../lib/db";
 import { KiraCommand } from "../../lib/structures/command";
 
@@ -24,4 +24,12 @@ export class UserCommand extends KiraCommand {
 
 		return msg.reply(`Prefix has been set to ${prefix}.`);
 	}
+
+	// public registerApplicationCommands(registry: ChatInputCommand.Registry) {
+	// 	registry.registerChatInputCommand((builder) => builder.setName((this.name)).setDescription(this.description).addStringOption((option => option.setName("prefix").setDescription("Set the new prefix for your guild!"))));
+	// }
+	//
+	// public chatInputRun(interaction, context: ChatInputCommand.RunContext) {
+	// 	console.log("Lol");
+	// }
 }

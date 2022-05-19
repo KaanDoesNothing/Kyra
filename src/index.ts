@@ -15,6 +15,7 @@ const sharder = new ShardingManager(join(__dirname, "kira"), {
             level: LogLevel.Warn
         },
         shards: "auto",
+        loadMessageCommandListeners: true,
         // api: {
         //     auth: {
         //         id: "",

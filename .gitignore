@@ -9,6 +9,7 @@ src/private.json
 *.js
 
 package-lock.json
+node_modules_old/
 yarn.lock
 yarn-error.log
 
